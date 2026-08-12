@@ -165,6 +165,37 @@
     color: var(--card-text, var(--ink));
     line-height:1.25;
   }
+
+  .status-row{
+    display:flex;
+    align-items:center;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .status-dot{
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex: none;
+    animation: blink 1.4s ease-in-out infinite;
+  }
+  .status-dot.verde{
+    background:#22c55e;
+    box-shadow: 0 0 6px 1px rgba(34,197,94,0.7);
+  }
+  .status-dot.rojo{
+    background:#ef4444;
+    box-shadow: 0 0 6px 1px rgba(239,68,68,0.7);
+  }
+  .status-text{
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--card-text-soft, var(--ink-soft));
+  }
+  @keyframes blink{
+    0%, 100% { opacity: 1; }
+    50% { opacity: .25; }
+  }
   .card-desc{
     font-size: 13px;
     color: var(--card-text-soft, var(--ink-soft));
@@ -280,6 +311,11 @@
                         ícono con las iniciales del nombre automáticamente.
         - href:        el link al que va el botón "Instalar". Aquí pones
                         la ruta o URL de tu .zip, .ipa, .plist, etc.
+        - estado:      el color del círculo parpadeante que va al lado del
+                        nombre. Solo dos valores válidos: "verde" o "rojo".
+        - estadoTexto: el texto pequeño que va al lado del círculo (ej.
+                        "Activo", "Caído", "En revisión"). Si lo dejas
+                        como "" no se muestra texto, solo el círculo.
 
    4) DÓNDE PONER LOS ARCHIVOS PARA DESCARGAR
       Sube tus archivos (.zip, .ipa, etc.) a la misma carpeta donde subas
@@ -306,28 +342,28 @@ const CONFIG = {
       navLabel: "Sección 1",
       color: "azul-claro",
       cards: [
-        { nombre:"App Uno",     descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"itms-services://?action=download-manifest&url=https://website.khoindvn.io.vn/plists/imhihlhggpea.plist" },
-        { nombre:"App Dos",     descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App Tres",    descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App Cuatro",  descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App Cinco",   descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App Seis",    descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App Siete",   descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App Ocho",    descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App Nueve",   descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App Diez",    descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App Once",    descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App Doce",    descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App Trece",   descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App Catorce", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App Quince",  descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App Dieciséis",  descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App Diecisiete", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App Dieciocho",  descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App Diecinueve", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App Veinte",     descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App Veintiuno",  descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App Veintidós",  descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" }
+        { nombre:"App Uno",     descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App Dos",     descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App Tres",    descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App Cuatro",  descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App Cinco",   descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App Seis",    descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App Siete",   descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App Ocho",    descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App Nueve",   descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App Diez",    descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App Once",    descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App Doce",    descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App Trece",   descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App Catorce", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App Quince",  descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App Dieciséis",  descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App Diecisiete", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App Dieciocho",  descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App Diecinueve", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App Veinte",     descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App Veintiuno",  descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App Veintidós",  descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" }
       ]
     },
     {
@@ -335,28 +371,28 @@ const CONFIG = {
       navLabel: "Sección 2",
       color: "azul-fuerte",
       cards: [
-        { nombre:"App 23", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 24", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 25", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 26", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 27", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 28", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 29", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 30", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 31", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 32", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 33", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 34", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 35", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 36", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 37", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 38", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 39", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 40", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 41", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 42", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 43", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 44", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" }
+        { nombre:"App 23", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 24", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 25", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 26", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 27", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 28", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 29", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 30", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 31", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 32", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 33", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 34", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 35", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 36", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 37", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 38", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 39", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 40", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 41", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 42", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 43", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 44", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" }
       ]
     },
     {
@@ -364,14 +400,14 @@ const CONFIG = {
       navLabel: "Sección 3",
       color: "rojo-claro",
       cards: [
-        { nombre:"App 45", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 46", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 47", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 48", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 49", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 50", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 51", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 52", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" }
+        { nombre:"App 45", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 46", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 47", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 48", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 49", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 50", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 51", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 52", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" }
       ]
     },
     {
@@ -379,13 +415,13 @@ const CONFIG = {
       navLabel: "Sección 4",
       color: "morado",
       cards: [
-        { nombre:"App 53", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 54", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 55", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 56", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 57", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 58", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" },
-        { nombre:"App 59", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#" }
+        { nombre:"App 53", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 54", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 55", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 56", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 57", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 58", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" },
+        { nombre:"App 59", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", href:"#", estado:"verde", estadoTexto:"Activo" }
       ]
     }
   ]
@@ -423,12 +459,33 @@ function buildCard(card){
     icon.textContent = initials(card.nombre);
   }
 
+  const info = document.createElement("div");
+
   const name = document.createElement("div");
   name.className = "card-name";
   name.textContent = card.nombre;
+  info.appendChild(name);
+
+  if(card.estado){
+    const statusRow = document.createElement("div");
+    statusRow.className = "status-row";
+
+    const dot = document.createElement("span");
+    dot.className = "status-dot " + card.estado;
+    statusRow.appendChild(dot);
+
+    if(card.estadoTexto){
+      const statusText = document.createElement("span");
+      statusText.className = "status-text";
+      statusText.textContent = card.estadoTexto;
+      statusRow.appendChild(statusText);
+    }
+
+    info.appendChild(statusRow);
+  }
 
   top.appendChild(icon);
-  top.appendChild(name);
+  top.appendChild(info);
 
   const desc = document.createElement("p");
   desc.className = "card-desc";
