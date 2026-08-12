@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Descargas</title>
+<style>
+  :root{
+    --bg: #f7f7f8;
+    --ink: #14151a;
+    --ink-soft: #6b6f76;
+    --nav-bg: rgba(250,250,251,0.72);
+    --line: rgba(20,21,26,0.08);
+    --radius: 18px;
+    --active-accent: #3b82f6;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Inter, Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- Barra de progreso superior (detalle "neón" sutil) ---------- */
+  .progress-bar{
+    position: sticky;
+    top: 0;
+    height: 3px;
+    width: 100%;
+    z-index: 60;
+    background: var(--active-accent);
+    box-shadow: 0 0 12px 1px var(--active-accent);
+    transition: background .5s ease, box-shadow .5s ease;
+  }
+
+  /* ---------- Barra superior ---------- */
+  .topbar{
+    position: sticky;
+    top: 3px;
+    z-index: 50;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 20px;
+    padding: 14px 28px;
+    background: var(--nav-bg);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border-bottom: 1px solid var(--line);
+    flex-wrap: wrap;
+  }
+  .brand{
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+  .section-nav{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+  }
+  .section-nav::-webkit-scrollbar{ display:none; }
+  .section-nav button{
+    flex: none;
+    border:1px solid var(--line);
+    background: rgba(255,255,255,0.6);
+    color: var(--ink-soft);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 999px;
+    cursor:pointer;
+    transition: all .25s ease;
+    white-space: nowrap;
+  }
+  .section-nav button:hover{ color: var(--ink); }
+  .section-nav button.active{
+    color:#fff;
+    background: var(--nav-btn-accent, #3b82f6);
+    border-color: transparent;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.02), 0 4px 14px -4px var(--nav-btn-accent, #3b82f6);
+  }
+
+  /* ---------- Secciones ---------- */
+  .zone{
+    padding: 64px 24px 80px;
+    background: var(--sec-bg);
+    color: var(--sec-text, var(--ink));
+    transition: background .4s ease;
+  }
+  .zone-inner{ max-width: 1180px; margin: 0 auto; }
+  .zone-head{
+    display:flex;
+    align-items:baseline;
+    gap: 14px;
+    margin-bottom: 34px;
+  }
+  .zone-head .dot{
+    width:10px; height:10px; border-radius:50%;
+    background: var(--sec-accent);
+    box-shadow: 0 0 10px 1px var(--sec-accent);
+    flex:none;
+  }
+  .zone-head h2{
+    font-size: 26px;
+    margin:0;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .zone-head .count{
+    font-size: 13px;
+    color: var(--sec-text-soft, var(--ink-soft));
+    font-weight: 500;
+  }
+
+  /* ---------- Grid de tarjetas ---------- */
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .card{
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 18px;
+    display:flex;
+    flex-direction:column;
+    gap: 12px;
+    transition: transform .2s ease, box-shadow .3s ease, border-color .3s ease;
+  }
+  .card:hover{
+    transform: translateY(-3px);
+    border-color: var(--sec-accent);
+    box-shadow: 0 10px 30px -12px var(--sec-accent);
+  }
+
+  .card-top{ display:flex; align-items:center; gap: 12px; }
+
+  .card-icon{
+    width: 52px; height:52px;
+    border-radius: 14px;
+    flex: none;
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+    background: linear-gradient(145deg, var(--sec-accent), color-mix(in srgb, var(--sec-accent) 55%, #000 10%));
+    color:#fff;
+    font-weight:700;
+    font-size: 16px;
+    letter-spacing: .02em;
+  }
+  .card-icon img{ width:100%; height:100%; object-fit:cover; }
+
+  .card-name{
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--card-text, var(--ink));
+    line-height:1.25;
+  }
+  .card-desc{
+    font-size: 13px;
+    color: var(--card-text-soft, var(--ink-soft));
+    line-height:1.4;
+    margin:0;
+    flex:1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .install-btn{
+    align-self: stretch;
+    text-align:center;
+    text-decoration:none;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .01em;
+    padding: 10px 14px;
+    border-radius: 999px;
+    color: #fff;
+    background: var(--sec-accent);
+    transition: filter .2s ease, box-shadow .2s ease;
+  }
+  .install-btn:hover{
+    filter: brightness(1.08);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--sec-accent) 20%, transparent);
+  }
+
+  /* ---------- Paletas por sección ---------- */
+  .zone[data-color="azul-claro"]{
+    --sec-bg: #eaf3ff;
+    --sec-accent: #3b82f6;
+    --card-bg: #ffffff;
+    --card-border: #cfe3ff;
+  }
+  .zone[data-color="azul-fuerte"]{
+    --sec-bg: #0f2138;
+    --sec-accent: #4da3ff;
+    --sec-text: #f2f6fb;
+    --sec-text-soft: #9db6d1;
+    --card-bg: #172c46;
+    --card-border: #2c4d70;
+    --card-text: #f2f6fb;
+    --card-text-soft: #a9bfd6;
+  }
+  .zone[data-color="rojo-claro"]{
+    --sec-bg: #fff1ef;
+    --sec-accent: #ff5a44;
+    --card-bg: #ffffff;
+    --card-border: #ffcfc4;
+  }
+  .zone[data-color="morado"]{
+    --sec-bg: #f3ecff;
+    --sec-accent: #8b5cf6;
+    --card-bg: #ffffff;
+    --card-border: #ded0ff;
+  }
+
+  footer{
+    text-align:center;
+    padding: 30px 20px 50px;
+    font-size:12px;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 640px){
+    .topbar{ padding: 12px 16px; }
+    .zone{ padding: 44px 16px 56px; }
+    .zone-head h2{ font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+<header class="topbar">
+  <div class="brand" id="brandTitle"></div>
+  <nav class="section-nav" id="sectionNav"></nav>
+</header>
+
+<main id="zonesContainer"></main>
+
+<footer>Sitio generado a medida · edita el bloque CONFIG en el código para personalizarlo</footer>
+
+<script>
+/* =========================================================================
+   PANEL DE EDICIÓN ("BACKEND")
+   =========================================================================
+   Este sitio es un archivo HTML estático: no tiene base de datos ni panel
+   de administración real. Todo lo que verías en un "backend" está aquí
+   mismo, en este bloque CONFIG. Edita estos valores y guarda el archivo,
+   eso es todo.
+
+   1) TÍTULO DEL SITIO
+      Cambia el texto de CONFIG.siteTitle.
+
+   2) SECCIONES
+      Hay 4 secciones fijas (no cambies sus "color", solo lo que quieras
+      de texto). Cada una tiene:
+        - navLabel: el nombre que aparece en el botón de arriba y como
+          título de la sección. Cámbialo por lo que quieras (ej. "Apps",
+          "Juegos", "Beta", etc).
+        - cards: la lista de cuadros de esa sección.
+
+   3) CADA CUADRO (instalación)
+      Cada cuadro tiene 4 datos, todos editables:
+        - nombre:      el nombre de la app/archivo.
+        - descripcion: el texto corto debajo del nombre.
+        - logo:        URL de una imagen (ej. "logos/miapp.png" o un link
+                        https://...). Si lo dejas como "" se muestra un
+                        ícono con las iniciales del nombre automáticamente.
+        - archivo:      el link al que va el botón "Instalar". Aquí pones
+                        la ruta o URL de tu .zip, .ipa, .plist, etc.
+
+   4) DÓNDE PONER LOS ARCHIVOS PARA DESCARGAR
+      Sube tus archivos (.zip, .ipa, etc.) a la misma carpeta donde subas
+      este index.html, por ejemplo dentro de una carpeta "archivos/", y
+      en "archivo" pon la ruta relativa: "archivos/nombreapp.zip".
+      También puedes poner un link externo completo, por ejemplo un link
+      directo de Google Drive, Dropbox, GitHub Releases, etc.
+
+      NOTA SOBRE .IPA EN iOS: Safari no instala un .ipa con un link normal.
+      Para que un iPhone instale una app directamente necesitas un enlace
+      tipo "itms-services://?action=download-manifest&url=https://tu-dominio.com/tuapp.plist"
+      apuntando a un archivo .plist alojado en HTTPS, y la app firmada
+      (empresarial/ad-hoc) o repartida por un servicio como Diawi/AltStore.
+      Para archivos .zip normales, un link directo de descarga funciona tal
+      cual, sin nada especial.
+   ========================================================================= */
+
+const CONFIG = {
+  siteTitle: "Mi Sitio de Descargas",
+
+  sections: [
+    {
+      id: "seccion-1",
+      navLabel: "Sección 1",
+      color: "azul-claro",
+      cards: [
+        { nombre:"App Uno",     descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App Dos",     descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App Tres",    descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App Cuatro",  descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App Cinco",   descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App Seis",    descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App Siete",   descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App Ocho",    descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App Nueve",   descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App Diez",    descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App Once",    descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App Doce",    descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App Trece",   descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App Catorce", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App Quince",  descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App Dieciséis",  descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App Diecisiete", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App Dieciocho",  descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App Diecinueve", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App Veinte",     descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App Veintiuno",  descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App Veintidós",  descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" }
+      ]
+    },
+    {
+      id: "seccion-2",
+      navLabel: "Sección 2",
+      color: "azul-fuerte",
+      cards: [
+        { nombre:"App 23", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 24", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 25", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 26", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 27", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 28", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 29", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 30", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 31", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 32", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 33", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 34", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 35", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 36", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 37", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 38", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 39", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 40", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 41", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 42", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 43", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 44", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" }
+      ]
+    },
+    {
+      id: "seccion-3",
+      navLabel: "Sección 3",
+      color: "rojo-claro",
+      cards: [
+        { nombre:"App 45", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 46", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 47", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 48", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 49", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 50", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 51", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 52", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" }
+      ]
+    },
+    {
+      id: "seccion-4",
+      navLabel: "Sección 4",
+      color: "morado",
+      cards: [
+        { nombre:"App 53", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 54", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 55", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 56", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 57", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 58", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" },
+        { nombre:"App 59", descripcion:"Descripción corta de la app. Edita este texto.", logo:"", archivo:"#" }
+      ]
+    }
+  ]
+};
+
+/* ========================= NO NECESITAS EDITAR NADA DE AQUÍ HACIA ABAJO ========================= */
+
+const ACCENTS = {
+  "azul-claro": "#3b82f6",
+  "azul-fuerte": "#4da3ff",
+  "rojo-claro": "#ff5a44",
+  "morado": "#8b5cf6"
+};
+
+function initials(name){
+  return name.trim().split(/\s+/).slice(0,2).map(w => w[0]).join("").toUpperCase();
+}
+
+function buildCard(card){
+  const el = document.createElement("article");
+  el.className = "card";
+
+  const top = document.createElement("div");
+  top.className = "card-top";
+
+  const icon = document.createElement("div");
+  icon.className = "card-icon";
+  if(card.logo){
+    const img = document.createElement("img");
+    img.src = card.logo;
+    img.alt = card.nombre;
+    img.onerror = () => { icon.innerHTML = ""; icon.textContent = initials(card.nombre); };
+    icon.appendChild(img);
+  } else {
+    icon.textContent = initials(card.nombre);
+  }
+
+  const name = document.createElement("div");
+  name.className = "card-name";
+  name.textContent = card.nombre;
+
+  top.appendChild(icon);
+  top.appendChild(name);
+
+  const desc = document.createElement("p");
+  desc.className = "card-desc";
+  desc.textContent = card.descripcion;
+
+  const btn = document.createElement("a");
+  btn.className = "install-btn";
+  btn.href = card.archivo || "#";
+  btn.textContent = "Instalar";
+
+  el.appendChild(top);
+  el.appendChild(desc);
+  el.appendChild(btn);
+  return el;
+}
+
+function build(){
+  document.getElementById("brandTitle").textContent = CONFIG.siteTitle;
+  document.title = CONFIG.siteTitle;
+
+  const nav = document.getElementById("sectionNav");
+  const container = document.getElementById("zonesContainer");
+
+  CONFIG.sections.forEach((section, idx) => {
+    // botón de navegación
+    const btn = document.createElement("button");
+    btn.textContent = section.navLabel;
+    btn.dataset.target = section.id;
+    btn.style.setProperty("--nav-btn-accent", ACCENTS[section.color]);
+    btn.addEventListener("click", () => {
+      document.getElementById(section.id).scrollIntoView({ behavior:"smooth", block:"start" });
+    });
+    nav.appendChild(btn);
+
+    // sección
+    const zone = document.createElement("section");
+    zone.id = section.id;
+    zone.className = "zone";
+    zone.dataset.color = section.color;
+
+    const inner = document.createElement("div");
+    inner.className = "zone-inner";
+
+    const head = document.createElement("div");
+    head.className = "zone-head";
+    head.innerHTML = `<span class="dot"></span><h2>${section.navLabel}</h2><span class="count">${section.cards.length} elementos</span>`;
+
+    const grid = document.createElement("div");
+    grid.className = "grid";
+    section.cards.forEach(card => grid.appendChild(buildCard(card)));
+
+    inner.appendChild(head);
+    inner.appendChild(grid);
+    zone.appendChild(inner);
+    container.appendChild(zone);
+  });
+
+  setupScrollTracking();
+}
+
+function setupScrollTracking(){
+  const navButtons = [...document.querySelectorAll(".section-nav button")];
+  const progressBar = document.getElementById("progressBar");
+  const zones = [...document.querySelectorAll(".zone")];
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const id = entry.target.id;
+        const color = entry.target.dataset.color;
+        const accent = ACCENTS[color];
+
+        navButtons.forEach(b => b.classList.toggle("active", b.dataset.target === id));
+        progressBar.style.setProperty("--active-accent", accent);
+        progressBar.style.background = accent;
+        progressBar.style.boxShadow = `0 0 12px 1px ${accent}`;
+      }
+    });
+  }, { threshold: 0, rootMargin: "-45% 0px -45% 0px" });
+
+  zones.forEach(z => observer.observe(z));
+}
+
+build();
+</script>
+</body>
+</html>
