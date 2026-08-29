@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Frost sideloadly</title>
+<title>Frost Sideloadly</title>
 <style>
   :root {
     --acento: #3b82f6;
@@ -11,19 +11,45 @@
     --fondo: #081120;
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',Arial,sans-serif; }
 
   body {
     background-color: var(--fondo);
     background-image:
-      radial-gradient(circle, rgba(var(--acento-rgb), 0.10) 1.5px, transparent 1.5px),
-      radial-gradient(circle, transparent 8px, rgba(var(--acento-rgb), 0.07) 8px, rgba(var(--acento-rgb), 0.07) 9.5px, transparent 9.5px);
+      radial-gradient(circle, rgba(var(--acento-rgb),.10) 1.5px, transparent 1.5px),
+      radial-gradient(circle, transparent 8px, rgba(var(--acento-rgb),.07) 8px, rgba(var(--acento-rgb),.07) 9.5px, transparent 9.5px);
     background-size: 48px 48px, 96px 96px;
     min-height: 100vh;
     color: #fff;
     transition: background-color .4s;
+    position: relative;
+    overflow-x: hidden;
   }
 
+  /* ── TEXTURA DE FONDO ── */
+  #bg-texture {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    user-select: none;
+    font-weight: 900;
+    word-break: break-all;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    padding: 12px;
+    gap: 0;
+    transition: color .4s;
+  }
+
+  header, .titulo-seccion, .logo-gigante, .switches, .lista-apps {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── HEADER ── */
   header {
     background: #000;
     display: flex;
@@ -31,159 +57,168 @@
     gap: 12px;
     padding: 10px 20px;
   }
-  header .red-social {
-    width: 34px; height: 34px;
-    border-radius: 50%;
-    background: #1a1a1a;
-    border: 1px solid #333;
-    display: flex; align-items: center; justify-content: center;
-    text-decoration: none;
-    transition: transform .2s;
+  .red-social {
+    width:34px; height:34px; border-radius:50%;
+    background:#1a1a1a; border:1px solid #333;
+    display:flex; align-items:center; justify-content:center;
+    text-decoration:none; transition:transform .2s;
   }
-  header .red-social:hover { transform: scale(1.15); }
-  header .red-social img { width: 20px; height: 20px; border-radius: 50%; }
-  header h1 { font-size: 17px; font-weight: 700; margin-left: 6px; }
+  .red-social:hover { transform:scale(1.15); }
+  .red-social img { width:20px; height:20px; border-radius:50%; }
+  header h1 { font-size:17px; font-weight:700; margin-left:6px; }
 
+  /* ── TÍTULO Y LOGO GRANDE ── */
   .titulo-seccion {
-    text-align: center;
-    color: var(--acento);
-    font-size: 30px;
-    font-weight: 800;
-    margin: 28px 0 14px;
-    transition: color .4s;
+    text-align:center; color:var(--acento);
+    font-size:30px; font-weight:800;
+    margin:28px 0 14px; transition:color .4s;
   }
 
   .logo-gigante {
-    width: 140px; height: 140px;
-    margin: 0 auto 22px;
-    border-radius: 50%;
-    overflow: hidden;
-    box-shadow: 0 0 30px 6px rgba(var(--acento-rgb), 0.55);
-    border: 3px solid rgba(var(--acento-rgb), 0.6);
-    background: linear-gradient(135deg, var(--acento), #1e293b);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 44px; font-weight: 800; color: #fff;
-    transition: box-shadow .4s, border-color .4s;
+    width:140px; height:140px;
+    margin:0 auto 22px;
+    border-radius:50%; overflow:hidden;
+    box-shadow:0 0 30px 6px rgba(var(--acento-rgb),.55);
+    border:3px solid rgba(var(--acento-rgb),.6);
+    background:linear-gradient(135deg,var(--acento),#1e293b);
+    display:flex; align-items:center; justify-content:center;
+    font-size:44px; font-weight:800; color:#fff;
+    transition:box-shadow .4s, border-color .4s;
   }
-  .logo-gigante img { width: 100%; height: 100%; object-fit: cover; }
+  .logo-gigante img {
+    width:100%; height:100%;
+    object-fit:cover; border-radius:50%;
+    display:block;
+  }
 
+  /* ── SWITCHES ── */
   .switches {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 45px;
-    padding: 0 15px;
+    display:flex; justify-content:center;
+    flex-wrap:wrap; gap:12px;
+    margin-bottom:45px; padding:0 15px;
   }
   .switch-btn {
-    padding: 8px 22px;
-    border-radius: 999px;
-    border: 1px solid rgba(var(--acento-rgb), 0.45);
-    background: rgba(10, 18, 32, 0.9);
-    color: #cbd5e1;
-    font-weight: 700;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all .2s;
+    padding:8px 22px; border-radius:999px;
+    border:1px solid rgba(var(--acento-rgb),.45);
+    background:rgba(10,18,32,.9);
+    color:#cbd5e1; font-weight:700; font-size:14px;
+    cursor:pointer; transition:all .2s;
   }
-  .switch-btn:hover { border-color: var(--acento); color: #fff; }
+  .switch-btn:hover { border-color:var(--acento); color:#fff; }
   .switch-btn.activo {
-    background: var(--acento);
-    color: #0a0f1a;
-    border-color: var(--acento);
-    box-shadow: 0 0 16px rgba(var(--acento-rgb), 0.6);
+    background:var(--acento); color:#0a0f1a;
+    border-color:var(--acento);
+    box-shadow:0 0 16px rgba(var(--acento-rgb),.6);
   }
 
+  /* ── LISTA DE APPS ── */
   .lista-apps {
-    max-width: 950px;
-    margin: 0 auto;
-    padding: 0 18px 60px;
-    display: flex;
-    flex-direction: column;
-    gap: 38px;
+    max-width:950px; margin:0 auto;
+    padding:0 18px 60px;
+    display:flex; flex-direction:column; gap:38px;
   }
 
+  /* ── TARJETA ── */
   .app-card {
-    position: relative;
-    background: #0c1424;
-    border: 1px solid rgba(var(--acento-rgb), 0.35);
-    border-radius: 16px;
-    box-shadow: 0 0 18px rgba(var(--acento-rgb), 0.18);
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    padding: 22px 24px;
-    transition: border-color .4s, box-shadow .4s;
+    position:relative;
+    background:#0c1424;
+    border:1px solid rgba(var(--acento-rgb),.35);
+    border-radius:16px;
+    box-shadow:0 0 18px rgba(var(--acento-rgb),.18);
+    display:flex; align-items:center; gap:18px;
+    padding:22px 24px;
+    transition:border-color .4s, box-shadow .4s;
   }
-
   .app-card .etiqueta-nombre {
-    position: absolute;
-    top: -16px; left: 18px;
-    background: #fff;
-    color: #0a0a0a;
-    font-weight: 800;
-    font-size: 14px;
-    padding: 5px 14px;
-    border-radius: 8px 8px 0 0;
-    box-shadow: 0 -2px 8px rgba(0,0,0,0.25);
+    position:absolute; top:-16px; left:18px;
+    background:#fff; color:#0a0a0a;
+    font-weight:800; font-size:14px;
+    padding:5px 14px; border-radius:8px 8px 0 0;
+    box-shadow:0 -2px 8px rgba(0,0,0,.25);
   }
 
+  /* ── ÍCONO APP — totalmente circular sin bordes blancos ── */
   .app-icono {
-    width: 62px; height: 62px;
-    min-width: 62px;
-    border-radius: 50%;
-    overflow: hidden;
-    background: linear-gradient(135deg, var(--acento), #1e293b);
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 800; font-size: 20px; color: #fff;
-    border: 2px solid rgba(var(--acento-rgb), 0.5);
+    width:62px; height:62px; min-width:62px;
+    border-radius:50%; overflow:hidden;
+    background:var(--acento);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:20px; color:#fff;
+    border:2.5px solid rgba(var(--acento-rgb),.6);
+    box-shadow:0 0 10px rgba(var(--acento-rgb),.3);
+    flex-shrink:0;
   }
-  .app-icono img { width: 100%; height: 100%; object-fit: cover; }
+  .app-icono img {
+    width:100%; height:100%;
+    object-fit:cover; border-radius:50%;
+    display:block; background:var(--acento);
+  }
 
-  .app-info { flex: 1; min-width: 0; }
+  /* ── INFO ── */
+  .app-info { flex:1; min-width:0; }
   .app-info .subtitulo {
-    color: #e2e8f0;
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 5px;
-    word-break: break-word;
+    color:#e2e8f0; font-size:13px; font-weight:600;
+    margin-bottom:5px; word-break:break-word;
   }
   .app-info .estado {
-    color: #94a3b8;
-    font-size: 12.5px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    color:#94a3b8; font-size:12.5px;
+    display:flex; align-items:center; gap:6px;
   }
   .orb {
-    display: inline-block;
-    width: 8px; height: 8px;
-    min-width: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
+    display:inline-block; width:8px; height:8px;
+    min-width:8px; border-radius:50%; flex-shrink:0;
   }
 
+  /* ── BOTÓN INSTALAR ── */
   .btn-instalar {
-    background: var(--acento);
-    color: #0a0f1a;
-    font-weight: 800;
-    font-size: 14px;
-    padding: 10px 26px;
-    border-radius: 999px;
-    text-decoration: none;
-    transition: all .2s;
-    white-space: nowrap;
+    background:var(--acento); color:#0a0f1a;
+    font-weight:800; font-size:14px;
+    padding:10px 26px; border-radius:999px;
+    text-decoration:none; transition:all .2s;
+    white-space:nowrap;
   }
-  .btn-instalar:hover { filter: brightness(1.2); box-shadow: 0 0 14px rgba(var(--acento-rgb), 0.7); }
+  .btn-instalar:hover {
+    filter:brightness(1.2);
+    box-shadow:0 0 14px rgba(var(--acento-rgb),.7);
+  }
 
-  @media (max-width: 600px) {
-    .app-card { flex-wrap: wrap; }
-    .btn-instalar { width: 100%; text-align: center; }
+  /* ── BOTÓN CHECK IPA LIBRARY ── */
+  .btn-ipa-library {
+    display:flex; align-items:center; justify-content:center;
+    gap:10px; width:100%;
+    padding:16px 28px;
+    background:rgba(var(--acento-rgb),.08);
+    border:1.5px solid rgba(var(--acento-rgb),.4);
+    border-radius:14px;
+    color:var(--acento); font-weight:800; font-size:15px;
+    text-decoration:none;
+    letter-spacing:.04em;
+    transition:all .25s;
+    margin-top:8px;
   }
+  .btn-ipa-library:hover {
+    background:rgba(var(--acento-rgb),.18);
+    border-color:var(--acento);
+    box-shadow:0 0 20px rgba(var(--acento-rgb),.35);
+    transform:translateY(-2px);
+  }
+  .ipa-arrow {
+    font-size:20px; transition:transform .2s;
+  }
+  .btn-ipa-library:hover .ipa-arrow { transform:translateX(5px); }
+
+  @media (max-width:600px) {
+    .app-card { flex-wrap:wrap; }
+    .btn-instalar { width:100%; text-align:center; }
+  }
+  /* ── ANIMACIÓN NUEVA FILA ── */
+  @keyframes cardIn{from{opacity:0;transform:translateY(-12px);}to{opacity:1;transform:none;}}
+  .card-new{animation:cardIn .35s ease;}
 </style>
 </head>
 <body>
 
+<div id="bg-texture"></div>
 <header id="barra-superior"></header>
 <h2 class="titulo-seccion" id="titulo-seccion"></h2>
 <div class="logo-gigante" id="logo-gigante"></div>
@@ -192,422 +227,398 @@
 
 <script>
 /* ################################################################################
-   ##                                                                            ##
-   ##   ★★★  BACKEND — CONFIGURACIÓN EDITABLE  ★★★                              ##
-   ##                                                                            ##
-   ##   TODO lo que quieres cambiar se hace AQUÍ.                               ##
-   ##                                                                            ##
-   ################################################################################
+   ★★★  BACKEND — CONFIGURACIÓN EDITABLE  ★★★
 
    ┌─────────────────────────────────────────────────────────────────────────────┐
-   │  CÓMO CAMBIAR EL ESTADO DE UNA ORB (DOT DE COLOR)                          │
+   │  CÓMO AGREGAR UNA APP NUEVA (copiar y pegar en GitHub editor):             │
    │                                                                             │
-   │  Cada app tiene un campo  estado:  que acepta estos valores:                │
+   │  1. Busca la sección que quieras (Ksign, ESign, Feather, etc.)             │
+   │  2. Copia UNA línea existente dentro de  apps:[ ... ]  por ejemplo:        │
    │                                                                             │
-   │    estado: "activo"    → 🟢 verde  | texto: "Active"                        │
-   │    estado: "revocado"  → 🔴 rojo   | texto: "Revoked"                       │
-   │    estado: "spam"      → 🔴 rojo   | texto: "Spam"                          │
-   │    estado: "updating"  → 🟡 amarillo| texto: "Updating"                     │
+   │  {nombre:"Ksign", subtitulo:"Aramco Services Company", estado:"activo", descarga:"itms-services://..."},
    │                                                                             │
-   │  Ejemplo para marcar la Jiangsu (workone) de Ksign como rojo spam:         │
-   │    { nombre: "Ksign", subtitulo: "Jiangsu Simcere ... (workone)",           │
-   │      estado: "spam",                                                        │
-   │      descarga: "itms-services://..." }                                      │
+   │  3. Pégala justo ANTES del  ],  que cierra la sección                      │
+   │  4. Cambia  subtitulo  y  descarga  por los valores nuevos                 │
+   │  5. Guarda / Commit → aparece automáticamente en el sitio                  │
    │                                                                             │
-   │  Para volver a verde: estado: "activo"                                      │
-   │  Para amarillo (en mantenimiento): estado: "updating"                       │
-   └─────────────────────────────────────────────────────────────────────────────┘
-
-   ┌─────────────────────────────────────────────────────────────────────────────┐
-   │  GUÍA RÁPIDA DE EDICIÓN                                                     │
+   │  ESTADOS DE LA ORB:                                                         │
+   │    estado:"activo"   → 🟢 verde                                             │
+   │    estado:"revocado" → 🔴 rojo                                              │
+   │    estado:"spam"     → 🔴 rojo                                              │
+   │    estado:"updating" → 🟡 amarillo                                          │
    │                                                                             │
-   │  tituloSitio ......... título en la barra negra de arriba                   │
-   │  redesSociales ........ íconos de redes en la barra. Edita la url de cada. │
-   │  secciones[].nombre ... nombre del switch (tab) y del título grande         │
-   │  secciones[].color .... cambia TODO el color de esa sección (#hex)         │
-   │  secciones[].logoApps . logo en círculo de todas las apps de la sección    │
-   │  apps[].nombre ........ etiqueta blanca superior de cada tarjeta            │
-   │  apps[].subtitulo ..... texto del modelo (cert) debajo del nombre           │
-   │  apps[].descarga ...... link itms-services o https del botón Instalar       │
-   │  apps[].estado ........ color de la orb: "activo" | "revocado" |           │
-   │                         "spam" | "updating"                                 │
+   │  FONDO NEGRO (como SideInstaller): fondoNegro:true  en la sección          │
    └─────────────────────────────────────────────────────────────────────────────┘
 */
 
 const CONFIG = {
 
-  tituloSitio: "Frost Hub Sideloadly",
-
-  logoGigante: "",
+  tituloSitio: "Frost Sideloadly",
 
   redesSociales: [
-    /* ✏️ Cambia la url de cada red por la tuya */
-    { nombre: "Discord",   url: "https://discord.gg/qshTKKrWQ",   icono: "https://cdn-icons-png.flaticon.com/512/5968/5968756.png" },
-    { nombre: "Twitter",   url: "https://twitter.com",   icono: "https://cdn-icons-png.flaticon.com/512/733/733579.png"  },
-    { nombre: "YouTube",   url: "https://youtube.com",   icono: "https://cdn-icons-png.flaticon.com/512/1384/1384060.png"},
-    { nombre: "Instagram", url: "https://instagram.com", icono: "https://cdn-icons-png.flaticon.com/512/2111/2111463.png"},
-    { nombre: "Telegram",  url: "https://t.me",          icono: "https://cdn-icons-png.flaticon.com/512/2111/2111646.png"},
+    { nombre:"Discord",   url:"https://discord.com",   icono:"https://cdn-icons-png.flaticon.com/512/5968/5968756.png" },
+    { nombre:"Twitter",   url:"https://twitter.com",   icono:"https://cdn-icons-png.flaticon.com/512/733/733579.png"  },
+    { nombre:"YouTube",   url:"https://youtube.com",   icono:"https://cdn-icons-png.flaticon.com/512/1384/1384060.png"},
+    { nombre:"Instagram", url:"https://instagram.com", icono:"https://cdn-icons-png.flaticon.com/512/2111/2111463.png"},
+    { nombre:"Telegram",  url:"https://t.me",          icono:"https://cdn-icons-png.flaticon.com/512/2111/2111646.png"},
   ],
 
   secciones: [
 
-    /* ════════════════════════════════════════════════════
-       KSIGN — azul fuerte
-    ════════════════════════════════════════════════════ */
+    /* ════════════════ KSIGN — azul fuerte ════════════════ */
     {
-      nombre:      "Ksign",
-      color:       "#3b82f6",
-      logoGigante: "",
-      logoApps:    "https://raw.githubusercontent.com/NexSideloading/signer-direct-installs/main/icons/Ksign_icon.png",
-      apps: [
-        { nombre:"Ksign", subtitulo:"Jiangsu Simcere Pharmaceutical Co.,Ltd (workone)",                                                                  estado:"Revoked",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FJiangsu%2520Simcere%2520Pharmaceutical%2520Co.%252CLtd%2520(workone)%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"Jiangsu Simcere Pharmaceutical Co.,Ltd (worktwo)",                                                                  estado:"Revoked",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FJiangsu%2520Simcere%2520Pharmaceutical%2520Co.%252CLtd%2520(worktwo)%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"Moving Increasingly Interconnected Technology Co., Ltd (comoaddw)",                                                  estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FMoving%2520Increasingly%2520Interconnected%2520Technology%2520Co.%252C%2520Ltd%2520(comoaddw)%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"Moving Increasingly Interconnected Technology Co., Ltd (com.oa11)",                                                  estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FMoving%2520Increasingly%2520Interconnected%2520Technology%2520Co.%252C%2520Ltd%2520(com.oa11)%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban inde)",                                                      estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FChina%2520Telecom%2520Corporation%2520Limited%2520(XC%2520com%2520ctq%2520qmc%2520yiban%2520inde)%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban product)",                                                   estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FChina%2520Telecom%2520Corporation%2520Limited%2520(XC%2520com%2520ctq%2520qmc%2520yiban%2520product)%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban p)",                                                         estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FChina%2520Telecom%2520Corporation%2520Limited%2520(XC%2520com%2520ctq%2520qmc%2520yiban%2520p)%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"XL AXIATA, PT TBK",                                                                                                  estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FXL%2520AXIATA%252C%2520PT%2520TBK%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"National Oilwell Varco, Inc (WB Carbon)",                                                                            estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FNational%2520Oilwell%2520Varco%252C%2520Inc%2520(WB%2520Carbon)%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"National Oilwell Varco, Inc (Carbon LAM)",                                                                           estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FNational%2520Oilwell%2520Varco%252C%2520Inc%2520(Carbon%2520LAM)%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"PowerChina International Group Limited (DoaTYw)",                                                                    estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FPowerChina%2520International%2520Group%2520Limited%2520(DoaTYw)%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"PowerChina International Group Limited (nj61nO)",                                                                    estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FPowerChina%2520International%2520Group%2520Limited%2520(nj61nO)%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"Qingdao Rural Commercial Bank Co., Ltd",                                                                             estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FQingdao%2520Rural%2520Commercial%2520Bank%2520Co.%252C%2520Ltd%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"China Academy of Railway Sciences",                                                                                  estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FChina%2520Academy%2520of%2520Railway%2520Sciences%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"PowerChina International Group Limited (j3krPY)",                                                                    estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FPowerChina%2520International%2520Group%2520Limited%2520(j3krPY)%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"Forevermark Marketing(Shanghai) Limited",                                                                            estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FForevermark%2520Marketing(Shanghai%2520)%2520Limited%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"BOC International (China) Limited (qi ye weixin app id huiyi kuozhan)",                                              estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520app%2520id%2520huiyi%2520kuozhan)%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"BOC International (China) Limited (qi ye weixin app id kuozhan)",                                                    estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520app%2520id%2520kuozhan)%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"BOC International (China) Limited (qi ye weixin app id tuisong kuozhan)",                                            estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520app%2520id%2520tuisong%2520kuozhan)%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"BOC International (China) Limited (qi ye weixin zhu app id)",                                                        estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520zhu%2520app%2520id)%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"CENTRAL POWER INFORMATION TECHNOLOGY COMPANY - CENTRAL POWER CORPORATION (com.cpc.it.thinghiemdien)",               estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FCENTRAL%2520POWER%2520INFORMATION%2520TECHNOLOGY%2520COMPANY%2520-%2520CENTRAL%2520POWER%2520CORPORATION%2520(com.cpc.it.thinghiemdien)%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"CENTRAL POWER INFORMATION TECHNOLOGY COMPANY - CENTRAL POWER CORPORATION (com.cpc.it.tracnghiemantoan)",            estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FCENTRAL%2520POWER%2520INFORMATION%2520TECHNOLOGY%2520COMPANY%2520-%2520CENTRAL%2520POWER%2520CORPORATION%2520(com.cpc.it.tracnghiemantoan)%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"PowerChina International Group Limited (iWaMrs)",                                                                    estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FPowerChina%2520International%2520Group%2520Limited%2520(iWaMrs)%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"PowerChina International Group Limited (HRU79V)",                                                                    estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FPowerChina%2520International%2520Group%2520Limited%2520(HRU79V)%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"Viet Nam Rubber Group Limited",                                                                                      estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FViet%2520Nam%2520Rubber%2520Group%2520Limited%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"Aramco Services Company",                                                                                            estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FAramco%2520Services%2520Company%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"Commission on Elections (Complaints Management)",                                                                    estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FCommission%2520on%2520Elections%2520(Complaints%2520Management)%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"Commission on Elections (Committee Supervision)",                                                                    estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FCommission%2520on%2520Elections%2520(Committee%2520Supervision)%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"Commission on Elections (United politics)",                                                                          estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FCommission%2520on%2520Elections%2520(United%2520politics)%2Fmanifest.plist" },
-        { nombre:"Ksign", subtitulo:"Beijing Zhizhangyi Inc. (SdpNetworkextension)",                                                                     estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FBeijing%2520Zhizhangyi%2520Inc.%2520(SdpNetworkextension)%2Fmanifest.plist" },
+      nombre:"Ksign", color:"#3b82f6", fondoNegro:false,
+      logoApps:"https://raw.githubusercontent.com/NexSideloading/signer-direct-installs/main/icons/Ksign_icon.png",
+      apps:[
+        {nombre:"Ksign",subtitulo:"Jiangsu Simcere Pharmaceutical Co.,Ltd (workone)",                                                                estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FJiangsu%2520Simcere%2520Pharmaceutical%2520Co.%252CLtd%2520(workone)%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"Jiangsu Simcere Pharmaceutical Co.,Ltd (worktwo)",                                                               estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FJiangsu%2520Simcere%2520Pharmaceutical%2520Co.%252CLtd%2520(worktwo)%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"Moving Increasingly Interconnected Technology Co., Ltd (comoaddw)",                                              estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FMoving%2520Increasingly%2520Interconnected%2520Technology%2520Co.%252C%2520Ltd%2520(comoaddw)%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"Moving Increasingly Interconnected Technology Co., Ltd (com.oa11)",                                              estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FMoving%2520Increasingly%2520Interconnected%2520Technology%2520Co.%252C%2520Ltd%2520(com.oa11)%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban inde)",                                                  estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FChina%2520Telecom%2520Corporation%2520Limited%2520(XC%2520com%2520ctq%2520qmc%2520yiban%2520inde)%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban product)",                                               estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FChina%2520Telecom%2520Corporation%2520Limited%2520(XC%2520com%2520ctq%2520qmc%2520yiban%2520product)%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban p)",                                                     estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FChina%2520Telecom%2520Corporation%2520Limited%2520(XC%2520com%2520ctq%2520qmc%2520yiban%2520p)%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"XL AXIATA, PT TBK",                                                                                              estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FXL%2520AXIATA%252C%2520PT%2520TBK%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"National Oilwell Varco, Inc (WB Carbon)",                                                                        estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FNational%2520Oilwell%2520Varco%252C%2520Inc%2520(WB%2520Carbon)%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"National Oilwell Varco, Inc (Carbon LAM)",                                                                       estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FNational%2520Oilwell%2520Varco%252C%2520Inc%2520(Carbon%2520LAM)%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"PowerChina International Group Limited (DoaTYw)",                                                                 estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FPowerChina%2520International%2520Group%2520Limited%2520(DoaTYw)%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"PowerChina International Group Limited (nj61nO)",                                                                 estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FPowerChina%2520International%2520Group%2520Limited%2520(nj61nO)%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"Qingdao Rural Commercial Bank Co., Ltd",                                                                         estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FQingdao%2520Rural%2520Commercial%2520Bank%2520Co.%252C%2520Ltd%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"China Academy of Railway Sciences",                                                                              estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FChina%2520Academy%2520of%2520Railway%2520Sciences%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"PowerChina International Group Limited (j3krPY)",                                                                 estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FPowerChina%2520International%2520Group%2520Limited%2520(j3krPY)%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"Forevermark Marketing(Shanghai) Limited",                                                                        estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FForevermark%2520Marketing(Shanghai%2520)%2520Limited%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"BOC International (China) Limited (qi ye weixin app id huiyi kuozhan)",                                          estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520app%2520id%2520huiyi%2520kuozhan)%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"BOC International (China) Limited (qi ye weixin app id kuozhan)",                                                estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520app%2520id%2520kuozhan)%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"BOC International (China) Limited (qi ye weixin app id tuisong kuozhan)",                                        estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520app%2520id%2520tuisong%2520kuozhan)%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"BOC International (China) Limited (qi ye weixin zhu app id)",                                                    estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520zhu%2520app%2520id)%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"CENTRAL POWER INFORMATION TECHNOLOGY COMPANY - CENTRAL POWER CORPORATION (com.cpc.it.thinghiemdien)",            estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FCENTRAL%2520POWER%2520INFORMATION%2520TECHNOLOGY%2520COMPANY%2520-%2520CENTRAL%2520POWER%2520CORPORATION%2520(com.cpc.it.thinghiemdien)%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"CENTRAL POWER INFORMATION TECHNOLOGY COMPANY - CENTRAL POWER CORPORATION (com.cpc.it.tracnghiemantoan)",         estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FCENTRAL%2520POWER%2520INFORMATION%2520TECHNOLOGY%2520COMPANY%2520-%2520CENTRAL%2520POWER%2520CORPORATION%2520(com.cpc.it.tracnghiemantoan)%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"PowerChina International Group Limited (iWaMrs)",                                                                estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FPowerChina%2520International%2520Group%2520Limited%2520(iWaMrs)%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"PowerChina International Group Limited (HRU79V)",                                                                estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FPowerChina%2520International%2520Group%2520Limited%2520(HRU79V)%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"Viet Nam Rubber Group Limited",                                                                                  estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FViet%2520Nam%2520Rubber%2520Group%2520Limited%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"Aramco Services Company",                                                                                        estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FAramco%2520Services%2520Company%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"Commission on Elections (Complaints Management)",                                                                estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FCommission%2520on%2520Elections%2520(Complaints%2520Management)%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"Commission on Elections (Committee Supervision)",                                                                estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FCommission%2520on%2520Elections%2520(Committee%2520Supervision)%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"Commission on Elections (United politics)",                                                                      estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FCommission%2520on%2520Elections%2520(United%2520politics)%2Fmanifest.plist"},
+        {nombre:"Ksign",subtitulo:"Beijing Zhizhangyi Inc. (SdpNetworkextension)",                                                                 estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FKsign%2FBeijing%2520Zhizhangyi%2520Inc.%2520(SdpNetworkextension)%2Fmanifest.plist"},
       ],
     },
 
-    /* ════════════════════════════════════════════════════
-       ESIGN — rojo
-    ════════════════════════════════════════════════════ */
+    /* ════════════════ ESIGN — azul cielo (diferente a Ksign) ════════════════ */
     {
-      nombre:      "ESign",
-      color:       "#ef4444",
-      logoGigante: "",
-      logoApps:    "https://raw.githubusercontent.com/NexSideloading/signer-direct-installs/main/icons/ESign_icon.png",
-      apps: [
-        { nombre:"ESign", subtitulo:"Jiangsu Simcere Pharmaceutical Co.,Ltd (workone)",                                                                   estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FJiangsu%2520Simcere%2520Pharmaceutical%2520Co.%252CLtd%2520(workone)%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"Jiangsu Simcere Pharmaceutical Co.,Ltd (worktwo)",                                                                   estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FJiangsu%2520Simcere%2520Pharmaceutical%2520Co.%252CLtd%2520(worktwo)%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"Moving Increasingly Interconnected Technology Co., Ltd (comoaddw)",                                                  estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FMoving%2520Increasingly%2520Interconnected%2520Technology%2520Co.%252C%2520Ltd%2520(comoaddw)%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"Moving Increasingly Interconnected Technology Co., Ltd (com.oa11)",                                                  estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FMoving%2520Increasingly%2520Interconnected%2520Technology%2520Co.%252C%2520Ltd%2520(com.oa11)%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban inde)",                                                      estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FChina%2520Telecom%2520Corporation%2520Limited%2520(XC%2520com%2520ctq%2520qmc%2520yiban%2520inde)%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban product)",                                                   estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FChina%2520Telecom%2520Corporation%2520Limited%2520(XC%2520com%2520ctq%2520qmc%2520yiban%2520product)%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban p)",                                                         estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FChina%2520Telecom%2520Corporation%2520Limited%2520(XC%2520com%2520ctq%2520qmc%2520yiban%2520p)%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"XL AXIATA, PT TBK",                                                                                                  estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FXL%2520AXIATA%252C%2520PT%2520TBK%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"National Oilwell Varco, Inc (WB Carbon)",                                                                            estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FNational%2520Oilwell%2520Varco%252C%2520Inc%2520(WB%2520Carbon)%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"National Oilwell Varco, Inc (Carbon LAM)",                                                                           estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FNational%2520Oilwell%2520Varco%252C%2520Inc%2520(Carbon%2520LAM)%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"PowerChina International Group Limited (DoaTYw)",                                                                    estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FPowerChina%2520International%2520Group%2520Limited%2520(DoaTYw)%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"PowerChina International Group Limited (nj61nO)",                                                                    estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FPowerChina%2520International%2520Group%2520Limited%2520(nj61nO)%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"Qingdao Rural Commercial Bank Co., Ltd",                                                                             estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FQingdao%2520Rural%2520Commercial%2520Bank%2520Co.%252C%2520Ltd%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"China Academy of Railway Sciences",                                                                                  estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FChina%2520Academy%2520of%2520Railway%2520Sciences%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"PowerChina International Group Limited (j3krPY)",                                                                    estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FPowerChina%2520International%2520Group%2520Limited%2520(j3krPY)%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"Forevermark Marketing(Shanghai) Limited",                                                                            estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FForevermark%2520Marketing(Shanghai%2520)%2520Limited%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"BOC International (China) Limited (qi ye weixin app id huiyi kuozhan)",                                              estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520app%2520id%2520huiyi%2520kuozhan)%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"BOC International (China) Limited (qi ye weixin app id kuozhan)",                                                    estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520app%2520id%2520kuozhan)%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"BOC International (China) Limited (qi ye weixin app id tuisong kuozhan)",                                            estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520app%2520id%2520tuisong%2520kuozhan)%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"BOC International (China) Limited (qi ye weixin zhu app id)",                                                        estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520zhu%2520app%2520id)%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"CENTRAL POWER INFORMATION TECHNOLOGY COMPANY - CENTRAL POWER CORPORATION (com.cpc.it.thinghiemdien)",               estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FCENTRAL%2520POWER%2520INFORMATION%2520TECHNOLOGY%2520COMPANY%2520-%2520CENTRAL%2520POWER%2520CORPORATION%2520(com.cpc.it.thinghiemdien)%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"CENTRAL POWER INFORMATION TECHNOLOGY COMPANY - CENTRAL POWER CORPORATION (com.cpc.it.tracnghiemantoan)",            estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FCENTRAL%2520POWER%2520INFORMATION%2520TECHNOLOGY%2520COMPANY%2520-%2520CENTRAL%2520POWER%2520CORPORATION%2520(com.cpc.it.tracnghiemantoan)%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"PowerChina International Group Limited (iWaMrs)",                                                                    estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FPowerChina%2520International%2520Group%2520Limited%2520(iWaMrs)%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"PowerChina International Group Limited (HRU79V)",                                                                    estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FPowerChina%2520International%2520Group%2520Limited%2520(HRU79V)%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"Viet Nam Rubber Group Limited",                                                                                      estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FViet%2520Nam%2520Rubber%2520Group%2520Limited%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"Aramco Services Company",                                                                                            estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FAramco%2520Services%2520Company%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"Commission on Elections (Complaints Management)",                                                                    estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FCommission%2520on%2520Elections%2520(Complaints%2520Management)%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"Commission on Elections (Committee Supervision)",                                                                    estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FCommission%2520on%2520Elections%2520(Committee%2520Supervision)%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"Commission on Elections (United politics)",                                                                          estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FCommission%2520on%2520Elections%2520(United%2520politics)%2Fmanifest.plist" },
-        { nombre:"ESign", subtitulo:"Beijing Zhizhangyi Inc. (SdpNetworkextension)",                                                                     estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FBeijing%2520Zhizhangyi%2520Inc.%2520(SdpNetworkextension)%2Fmanifest.plist" },
+      nombre:"ESign", color:"#0ea5e9", fondoNegro:false,
+      logoApps:"https://raw.githubusercontent.com/NexSideloading/signer-direct-installs/main/icons/ESign_icon.png",
+      apps:[
+        {nombre:"ESign",subtitulo:"Jiangsu Simcere Pharmaceutical Co.,Ltd (workone)",                                                               estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FJiangsu%2520Simcere%2520Pharmaceutical%2520Co.%252CLtd%2520(workone)%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"Jiangsu Simcere Pharmaceutical Co.,Ltd (worktwo)",                                                              estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FJiangsu%2520Simcere%2520Pharmaceutical%2520Co.%252CLtd%2520(worktwo)%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"Moving Increasingly Interconnected Technology Co., Ltd (comoaddw)",                                             estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FMoving%2520Increasingly%2520Interconnected%2520Technology%2520Co.%252C%2520Ltd%2520(comoaddw)%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"Moving Increasingly Interconnected Technology Co., Ltd (com.oa11)",                                             estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FMoving%2520Increasingly%2520Interconnected%2520Technology%2520Co.%252C%2520Ltd%2520(com.oa11)%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban inde)",                                                 estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FChina%2520Telecom%2520Corporation%2520Limited%2520(XC%2520com%2520ctq%2520qmc%2520yiban%2520inde)%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban product)",                                              estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FChina%2520Telecom%2520Corporation%2520Limited%2520(XC%2520com%2520ctq%2520qmc%2520yiban%2520product)%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban p)",                                                    estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FChina%2520Telecom%2520Corporation%2520Limited%2520(XC%2520com%2520ctq%2520qmc%2520yiban%2520p)%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"XL AXIATA, PT TBK",                                                                                             estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FXL%2520AXIATA%252C%2520PT%2520TBK%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"National Oilwell Varco, Inc (WB Carbon)",                                                                       estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FNational%2520Oilwell%2520Varco%252C%2520Inc%2520(WB%2520Carbon)%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"National Oilwell Varco, Inc (Carbon LAM)",                                                                      estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FNational%2520Oilwell%2520Varco%252C%2520Inc%2520(Carbon%2520LAM)%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"PowerChina International Group Limited (DoaTYw)",                                                               estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FPowerChina%2520International%2520Group%2520Limited%2520(DoaTYw)%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"PowerChina International Group Limited (nj61nO)",                                                               estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FPowerChina%2520International%2520Group%2520Limited%2520(nj61nO)%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"Qingdao Rural Commercial Bank Co., Ltd",                                                                        estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FQingdao%2520Rural%2520Commercial%2520Bank%2520Co.%252C%2520Ltd%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"China Academy of Railway Sciences",                                                                             estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FChina%2520Academy%2520of%2520Railway%2520Sciences%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"PowerChina International Group Limited (j3krPY)",                                                               estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FPowerChina%2520International%2520Group%2520Limited%2520(j3krPY)%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"Forevermark Marketing(Shanghai) Limited",                                                                       estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FForevermark%2520Marketing(Shanghai%2520)%2520Limited%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"BOC International (China) Limited (qi ye weixin app id huiyi kuozhan)",                                         estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520app%2520id%2520huiyi%2520kuozhan)%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"BOC International (China) Limited (qi ye weixin app id kuozhan)",                                               estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520app%2520id%2520kuozhan)%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"BOC International (China) Limited (qi ye weixin app id tuisong kuozhan)",                                       estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520app%2520id%2520tuisong%2520kuozhan)%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"BOC International (China) Limited (qi ye weixin zhu app id)",                                                   estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520zhu%2520app%2520id)%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"CENTRAL POWER INFORMATION TECHNOLOGY COMPANY - CENTRAL POWER CORPORATION (com.cpc.it.thinghiemdien)",           estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FCENTRAL%2520POWER%2520INFORMATION%2520TECHNOLOGY%2520COMPANY%2520-%2520CENTRAL%2520POWER%2520CORPORATION%2520(com.cpc.it.thinghiemdien)%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"CENTRAL POWER INFORMATION TECHNOLOGY COMPANY - CENTRAL POWER CORPORATION (com.cpc.it.tracnghiemantoan)",        estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FCENTRAL%2520POWER%2520INFORMATION%2520TECHNOLOGY%2520COMPANY%2520-%2520CENTRAL%2520POWER%2520CORPORATION%2520(com.cpc.it.tracnghiemantoan)%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"PowerChina International Group Limited (iWaMrs)",                                                               estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FPowerChina%2520International%2520Group%2520Limited%2520(iWaMrs)%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"PowerChina International Group Limited (HRU79V)",                                                               estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FPowerChina%2520International%2520Group%2520Limited%2520(HRU79V)%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"Viet Nam Rubber Group Limited",                                                                                 estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FViet%2520Nam%2520Rubber%2520Group%2520Limited%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"Aramco Services Company",                                                                                       estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FAramco%2520Services%2520Company%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"Commission on Elections (Complaints Management)",                                                               estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FCommission%2520on%2520Elections%2520(Complaints%2520Management)%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"Commission on Elections (Committee Supervision)",                                                               estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FCommission%2520on%2520Elections%2520(Committee%2520Supervision)%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"Commission on Elections (United politics)",                                                                     estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FCommission%2520on%2520Elections%2520(United%2520politics)%2Fmanifest.plist"},
+        {nombre:"ESign",subtitulo:"Beijing Zhizhangyi Inc. (SdpNetworkextension)",                                                                estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FESign%2FBeijing%2520Zhizhangyi%2520Inc.%2520(SdpNetworkextension)%2Fmanifest.plist"},
       ],
     },
 
-    /* ════════════════════════════════════════════════════
-       FEATHER — verde
-    ════════════════════════════════════════════════════ */
+    /* ════════════════ FEATHER — morado ════════════════ */
     {
-      nombre:      "Feather",
-      color:       "#4ade80",
-      logoGigante: "",
-      logoApps:    "https://raw.githubusercontent.com/NexSideloading/signer-direct-installs/main/icons/Feather_icon.png",
-      apps: [
-        { nombre:"Feather", subtitulo:"Jiangsu Simcere Pharmaceutical Co.,Ltd (workone)",                                                                 estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FJiangsu%2520Simcere%2520Pharmaceutical%2520Co.%252CLtd%2520(workone)%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"Jiangsu Simcere Pharmaceutical Co.,Ltd (worktwo)",                                                                 estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FJiangsu%2520Simcere%2520Pharmaceutical%2520Co.%252CLtd%2520(worktwo)%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"Moving Increasingly Interconnected Technology Co., Ltd (comoaddw)",                                                estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FMoving%2520Increasingly%2520Interconnected%2520Technology%2520Co.%252C%2520Ltd%2520(comoaddw)%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"Moving Increasingly Interconnected Technology Co., Ltd (com.oa11)",                                                estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FMoving%2520Increasingly%2520Interconnected%2520Technology%2520Co.%252C%2520Ltd%2520(com.oa11)%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban inde)",                                                    estado:"spam",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FChina%2520Telecom%2520Corporation%2520Limited%2520(XC%2520com%2520ctq%2520qmc%2520yiban%2520inde)%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban product)",                                                 estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FChina%2520Telecom%2520Corporation%2520Limited%2520(XC%2520com%2520ctq%2520qmc%2520yiban%2520product)%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban p)",                                                       estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FChina%2520Telecom%2520Corporation%2520Limited%2520(XC%2520com%2520ctq%2520qmc%2520yiban%2520p)%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"XL AXIATA, PT TBK",                                                                                                estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FXL%2520AXIATA%252C%2520PT%2520TBK%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"National Oilwell Varco, Inc (WB Carbon)",                                                                          estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FNational%2520Oilwell%2520Varco%252C%2520Inc%2520(WB%2520Carbon)%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"National Oilwell Varco, Inc (Carbon LAM)",                                                                         estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FNational%2520Oilwell%2520Varco%252C%2520Inc%2520(Carbon%2520LAM)%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"PowerChina International Group Limited (DoaTYw)",                                                                  estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FPowerChina%2520International%2520Group%2520Limited%2520(DoaTYw)%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"PowerChina International Group Limited (nj61nO)",                                                                  estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FPowerChina%2520International%2520Group%2520Limited%2520(nj61nO)%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"Qingdao Rural Commercial Bank Co., Ltd",                                                                           estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FQingdao%2520Rural%2520Commercial%2520Bank%2520Co.%252C%2520Ltd%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"China Academy of Railway Sciences",                                                                                estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FChina%2520Academy%2520of%2520Railway%2520Sciences%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"PowerChina International Group Limited (j3krPY)",                                                                  estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FPowerChina%2520International%2520Group%2520Limited%2520(j3krPY)%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"Forevermark Marketing(Shanghai) Limited",                                                                          estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FForevermark%2520Marketing(Shanghai%2520)%2520Limited%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"BOC International (China) Limited (qi ye weixin app id huiyi kuozhan)",                                            estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520app%2520id%2520huiyi%2520kuozhan)%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"BOC International (China) Limited (qi ye weixin app id kuozhan)",                                                  estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520app%2520id%2520kuozhan)%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"BOC International (China) Limited (qi ye weixin app id tuisong kuozhan)",                                          estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520app%2520id%2520tuisong%2520kuozhan)%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"BOC International (China) Limited (qi ye weixin zhu app id)",                                                      estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520zhu%2520app%2520id)%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"CENTRAL POWER INFORMATION TECHNOLOGY COMPANY - CENTRAL POWER CORPORATION (com.cpc.it.thinghiemdien)",             estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FCENTRAL%2520POWER%2520INFORMATION%2520TECHNOLOGY%2520COMPANY%2520-%2520CENTRAL%2520POWER%2520CORPORATION%2520(com.cpc.it.thinghiemdien)%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"CENTRAL POWER INFORMATION TECHNOLOGY COMPANY - CENTRAL POWER CORPORATION (com.cpc.it.tracnghiemantoan)",          estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FCENTRAL%2520POWER%2520INFORMATION%2520TECHNOLOGY%2520COMPANY%2520-%2520CENTRAL%2520POWER%2520CORPORATION%2520(com.cpc.it.tracnghiemantoan)%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"PowerChina International Group Limited (iWaMrs)",                                                                  estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FPowerChina%2520International%2520Group%2520Limited%2520(iWaMrs)%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"PowerChina International Group Limited (HRU79V)",                                                                  estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FPowerChina%2520International%2520Group%2520Limited%2520(HRU79V)%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"Viet Nam Rubber Group Limited",                                                                                    estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FViet%2520Nam%2520Rubber%2520Group%2520Limited%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"Aramco Services Company",                                                                                          estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FAramco%2520Services%2520Company%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"Commission on Elections (Complaints Management)",                                                                  estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FCommission%2520on%2520Elections%2520(Complaints%2520Management)%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"Commission on Elections (Committee Supervision)",                                                                  estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FCommission%2520on%2520Elections%2520(Committee%2520Supervision)%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"Commission on Elections (United politics)",                                                                        estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FCommission%2520on%2520Elections%2520(United%2520politics)%2Fmanifest.plist" },
-        { nombre:"Feather", subtitulo:"Beijing Zhizhangyi Inc. (SdpNetworkextension)",                                                                   estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FBeijing%2520Zhizhangyi%2520Inc.%2520(SdpNetworkextension)%2Fmanifest.plist" },
+      nombre:"Feather", color:"#7c3aed", fondoNegro:false,
+      logoApps:"https://raw.githubusercontent.com/NexSideloading/signer-direct-installs/main/icons/Feather_icon.png",
+      apps:[
+        {nombre:"Feather",subtitulo:"Jiangsu Simcere Pharmaceutical Co.,Ltd (workone)",                                                              estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FJiangsu%2520Simcere%2520Pharmaceutical%2520Co.%252CLtd%2520(workone)%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"Jiangsu Simcere Pharmaceutical Co.,Ltd (worktwo)",                                                             estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FJiangsu%2520Simcere%2520Pharmaceutical%2520Co.%252CLtd%2520(worktwo)%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"Moving Increasingly Interconnected Technology Co., Ltd (comoaddw)",                                            estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FMoving%2520Increasingly%2520Interconnected%2520Technology%2520Co.%252C%2520Ltd%2520(comoaddw)%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"Moving Increasingly Interconnected Technology Co., Ltd (com.oa11)",                                            estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FMoving%2520Increasingly%2520Interconnected%2520Technology%2520Co.%252C%2520Ltd%2520(com.oa11)%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban inde)",                                               estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FChina%2520Telecom%2520Corporation%2520Limited%2520(XC%2520com%2520ctq%2520qmc%2520yiban%2520inde)%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban product)",                                            estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FChina%2520Telecom%2520Corporation%2520Limited%2520(XC%2520com%2520ctq%2520qmc%2520yiban%2520product)%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban p)",                                                  estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FChina%2520Telecom%2520Corporation%2520Limited%2520(XC%2520com%2520ctq%2520qmc%2520yiban%2520p)%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"XL AXIATA, PT TBK",                                                                                           estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FXL%2520AXIATA%252C%2520PT%2520TBK%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"National Oilwell Varco, Inc (WB Carbon)",                                                                     estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FNational%2520Oilwell%2520Varco%252C%2520Inc%2520(WB%2520Carbon)%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"National Oilwell Varco, Inc (Carbon LAM)",                                                                    estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FNational%2520Oilwell%2520Varco%252C%2520Inc%2520(Carbon%2520LAM)%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"PowerChina International Group Limited (DoaTYw)",                                                             estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FPowerChina%2520International%2520Group%2520Limited%2520(DoaTYw)%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"PowerChina International Group Limited (nj61nO)",                                                             estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FPowerChina%2520International%2520Group%2520Limited%2520(nj61nO)%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"Qingdao Rural Commercial Bank Co., Ltd",                                                                      estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FQingdao%2520Rural%2520Commercial%2520Bank%2520Co.%252C%2520Ltd%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"China Academy of Railway Sciences",                                                                           estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FChina%2520Academy%2520of%2520Railway%2520Sciences%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"PowerChina International Group Limited (j3krPY)",                                                             estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FPowerChina%2520International%2520Group%2520Limited%2520(j3krPY)%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"Forevermark Marketing(Shanghai) Limited",                                                                     estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FForevermark%2520Marketing(Shanghai%2520)%2520Limited%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"BOC International (China) Limited (qi ye weixin app id huiyi kuozhan)",                                       estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520app%2520id%2520huiyi%2520kuozhan)%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"BOC International (China) Limited (qi ye weixin app id kuozhan)",                                             estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520app%2520id%2520kuozhan)%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"BOC International (China) Limited (qi ye weixin app id tuisong kuozhan)",                                     estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520app%2520id%2520tuisong%2520kuozhan)%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"BOC International (China) Limited (qi ye weixin zhu app id)",                                                 estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520zhu%2520app%2520id)%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"CENTRAL POWER INFORMATION TECHNOLOGY COMPANY - CENTRAL POWER CORPORATION (com.cpc.it.thinghiemdien)",         estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FCENTRAL%2520POWER%2520INFORMATION%2520TECHNOLOGY%2520COMPANY%2520-%2520CENTRAL%2520POWER%2520CORPORATION%2520(com.cpc.it.thinghiemdien)%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"CENTRAL POWER INFORMATION TECHNOLOGY COMPANY - CENTRAL POWER CORPORATION (com.cpc.it.tracnghiemantoan)",      estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FCENTRAL%2520POWER%2520INFORMATION%2520TECHNOLOGY%2520COMPANY%2520-%2520CENTRAL%2520POWER%2520CORPORATION%2520(com.cpc.it.tracnghiemantoan)%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"PowerChina International Group Limited (iWaMrs)",                                                             estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FPowerChina%2520International%2520Group%2520Limited%2520(iWaMrs)%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"PowerChina International Group Limited (HRU79V)",                                                             estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FPowerChina%2520International%2520Group%2520Limited%2520(HRU79V)%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"Viet Nam Rubber Group Limited",                                                                               estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FViet%2520Nam%2520Rubber%2520Group%2520Limited%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"Aramco Services Company",                                                                                     estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FAramco%2520Services%2520Company%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"Commission on Elections (Complaints Management)",                                                             estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FCommission%2520on%2520Elections%2520(Complaints%2520Management)%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"Commission on Elections (Committee Supervision)",                                                             estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FCommission%2520on%2520Elections%2520(Committee%2520Supervision)%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"Commission on Elections (United politics)",                                                                   estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FCommission%2520on%2520Elections%2520(United%2520politics)%2Fmanifest.plist"},
+        {nombre:"Feather",subtitulo:"Beijing Zhizhangyi Inc. (SdpNetworkextension)",                                                              estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FFeather%2FBeijing%2520Zhizhangyi%2520Inc.%2520(SdpNetworkextension)%2Fmanifest.plist"},
       ],
     },
 
-    /* ════════════════════════════════════════════════════
-       SCARLET — rojo oscuro / escarlata
-    ════════════════════════════════════════════════════ */
+    /* ════════════════ SCARLET — escarlata ════════════════ */
     {
-      nombre:      "Scarlet",
-      color:       "#f43f5e",
-      logoGigante: "",
-      logoApps:    "https://raw.githubusercontent.com/NexSideloading/signer-direct-installs/main/icons/Scarlet_icon.png",
-      apps: [
-        { nombre:"Scarlet", subtitulo:"Jiangsu Simcere Pharmaceutical Co.,Ltd (workone)",                                                                 estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FJiangsu%2520Simcere%2520Pharmaceutical%2520Co.%252CLtd%2520(workone)%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"Jiangsu Simcere Pharmaceutical Co.,Ltd (worktwo)",                                                                 estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FJiangsu%2520Simcere%2520Pharmaceutical%2520Co.%252CLtd%2520(worktwo)%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"Moving Increasingly Interconnected Technology Co., Ltd (comoaddw)",                                                estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FMoving%2520Increasingly%2520Interconnected%2520Technology%2520Co.%252C%2520Ltd%2520(comoaddw)%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"Moving Increasingly Interconnected Technology Co., Ltd (com.oa11)",                                                estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FMoving%2520Increasingly%2520Interconnected%2520Technology%2520Co.%252C%2520Ltd%2520(com.oa11)%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban inde)",                                                    estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FChina%2520Telecom%2520Corporation%2520Limited%2520(XC%2520com%2520ctq%2520qmc%2520yiban%2520inde)%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban product)",                                                 estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FChina%2520Telecom%2520Corporation%2520Limited%2520(XC%2520com%2520ctq%2520qmc%2520yiban%2520product)%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban p)",                                                       estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FChina%2520Telecom%2520Corporation%2520Limited%2520(XC%2520com%2520ctq%2520qmc%2520yiban%2520p)%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"XL AXIATA, PT TBK",                                                                                                estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FXL%2520AXIATA%252C%2520PT%2520TBK%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"National Oilwell Varco, Inc (WB Carbon)",                                                                          estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FNational%2520Oilwell%2520Varco%252C%2520Inc%2520(WB%2520Carbon)%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"National Oilwell Varco, Inc (Carbon LAM)",                                                                         estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FNational%2520Oilwell%2520Varco%252C%2520Inc%2520(Carbon%2520LAM)%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"PowerChina International Group Limited (DoaTYw)",                                                                  estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FPowerChina%2520International%2520Group%2520Limited%2520(DoaTYw)%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"PowerChina International Group Limited (nj61nO)",                                                                  estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FPowerChina%2520International%2520Group%2520Limited%2520(nj61nO)%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"Qingdao Rural Commercial Bank Co., Ltd",                                                                           estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FQingdao%2520Rural%2520Commercial%2520Bank%2520Co.%252C%2520Ltd%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"China Academy of Railway Sciences",                                                                                estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FChina%2520Academy%2520of%2520Railway%2520Sciences%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"PowerChina International Group Limited (j3krPY)",                                                                  estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FPowerChina%2520International%2520Group%2520Limited%2520(j3krPY)%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"Forevermark Marketing(Shanghai) Limited",                                                                          estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FForevermark%2520Marketing(Shanghai%2520)%2520Limited%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"BOC International (China) Limited (qi ye weixin app id huiyi kuozhan)",                                            estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520app%2520id%2520huiyi%2520kuozhan)%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"BOC International (China) Limited (qi ye weixin app id kuozhan)",                                                  estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520app%2520id%2520kuozhan)%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"BOC International (China) Limited (qi ye weixin app id tuisong kuozhan)",                                          estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520app%2520id%2520tuisong%2520kuozhan)%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"BOC International (China) Limited (qi ye weixin zhu app id)",                                                      estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520zhu%2520app%2520id)%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"CENTRAL POWER INFORMATION TECHNOLOGY COMPANY - CENTRAL POWER CORPORATION (com.cpc.it.thinghiemdien)",             estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FCENTRAL%2520POWER%2520INFORMATION%2520TECHNOLOGY%2520COMPANY%2520-%2520CENTRAL%2520POWER%2520CORPORATION%2520(com.cpc.it.thinghiemdien)%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"CENTRAL POWER INFORMATION TECHNOLOGY COMPANY - CENTRAL POWER CORPORATION (com.cpc.it.tracnghiemantoan)",          estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FCENTRAL%2520POWER%2520INFORMATION%2520TECHNOLOGY%2520COMPANY%2520-%2520CENTRAL%2520POWER%2520CORPORATION%2520(com.cpc.it.tracnghiemantoan)%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"PowerChina International Group Limited (iWaMrs)",                                                                  estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FPowerChina%2520International%2520Group%2520Limited%2520(iWaMrs)%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"PowerChina International Group Limited (HRU79V)",                                                                  estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FPowerChina%2520International%2520Group%2520Limited%2520(HRU79V)%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"Viet Nam Rubber Group Limited",                                                                                    estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FViet%2520Nam%2520Rubber%2520Group%2520Limited%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"Aramco Services Company",                                                                                          estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FAramco%2520Services%2520Company%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"Commission on Elections (Complaints Management)",                                                                  estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FCommission%2520on%2520Elections%2520(Complaints%2520Management)%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"Commission on Elections (Committee Supervision)",                                                                  estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FCommission%2520on%2520Elections%2520(Committee%2520Supervision)%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"Commission on Elections (United politics)",                                                                        estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FCommission%2520on%2520Elections%2520(United%2520politics)%2Fmanifest.plist" },
-        { nombre:"Scarlet", subtitulo:"Beijing Zhizhangyi Inc. (SdpNetworkextension)",                                                                   estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FBeijing%2520Zhizhangyi%2520Inc.%2520(SdpNetworkextension)%2Fmanifest.plist" },
+      nombre:"Scarlet", color:"#f43f5e", fondoNegro:false,
+      logoApps:"https://raw.githubusercontent.com/NexSideloading/signer-direct-installs/main/icons/Scarlet_icon.png",
+      apps:[
+        {nombre:"Scarlet",subtitulo:"Jiangsu Simcere Pharmaceutical Co.,Ltd (workone)",                                                             estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FJiangsu%2520Simcere%2520Pharmaceutical%2520Co.%252CLtd%2520(workone)%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"Jiangsu Simcere Pharmaceutical Co.,Ltd (worktwo)",                                                            estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FJiangsu%2520Simcere%2520Pharmaceutical%2520Co.%252CLtd%2520(worktwo)%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"Moving Increasingly Interconnected Technology Co., Ltd (comoaddw)",                                           estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FMoving%2520Increasingly%2520Interconnected%2520Technology%2520Co.%252C%2520Ltd%2520(comoaddw)%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"Moving Increasingly Interconnected Technology Co., Ltd (com.oa11)",                                           estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FMoving%2520Increasingly%2520Interconnected%2520Technology%2520Co.%252C%2520Ltd%2520(com.oa11)%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban inde)",                                              estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FChina%2520Telecom%2520Corporation%2520Limited%2520(XC%2520com%2520ctq%2520qmc%2520yiban%2520inde)%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban product)",                                           estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FChina%2520Telecom%2520Corporation%2520Limited%2520(XC%2520com%2520ctq%2520qmc%2520yiban%2520product)%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban p)",                                                 estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FChina%2520Telecom%2520Corporation%2520Limited%2520(XC%2520com%2520ctq%2520qmc%2520yiban%2520p)%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"XL AXIATA, PT TBK",                                                                                          estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FXL%2520AXIATA%252C%2520PT%2520TBK%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"National Oilwell Varco, Inc (WB Carbon)",                                                                    estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FNational%2520Oilwell%2520Varco%252C%2520Inc%2520(WB%2520Carbon)%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"National Oilwell Varco, Inc (Carbon LAM)",                                                                   estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FNational%2520Oilwell%2520Varco%252C%2520Inc%2520(Carbon%2520LAM)%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"PowerChina International Group Limited (DoaTYw)",                                                            estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FPowerChina%2520International%2520Group%2520Limited%2520(DoaTYw)%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"PowerChina International Group Limited (nj61nO)",                                                            estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FPowerChina%2520International%2520Group%2520Limited%2520(nj61nO)%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"Qingdao Rural Commercial Bank Co., Ltd",                                                                     estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FQingdao%2520Rural%2520Commercial%2520Bank%2520Co.%252C%2520Ltd%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"China Academy of Railway Sciences",                                                                          estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FChina%2520Academy%2520of%2520Railway%2520Sciences%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"PowerChina International Group Limited (j3krPY)",                                                            estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FPowerChina%2520International%2520Group%2520Limited%2520(j3krPY)%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"Forevermark Marketing(Shanghai) Limited",                                                                    estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FForevermark%2520Marketing(Shanghai%2520)%2520Limited%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"BOC International (China) Limited (qi ye weixin app id huiyi kuozhan)",                                      estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520app%2520id%2520huiyi%2520kuozhan)%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"BOC International (China) Limited (qi ye weixin app id kuozhan)",                                            estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520app%2520id%2520kuozhan)%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"BOC International (China) Limited (qi ye weixin app id tuisong kuozhan)",                                    estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520app%2520id%2520tuisong%2520kuozhan)%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"BOC International (China) Limited (qi ye weixin zhu app id)",                                                estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FBOC%2520International%2520(China)%2520Limited%2520(qi%2520ye%2520weixin%2520zhu%2520app%2520id)%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"CENTRAL POWER INFORMATION TECHNOLOGY COMPANY - CENTRAL POWER CORPORATION (com.cpc.it.thinghiemdien)",        estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FCENTRAL%2520POWER%2520INFORMATION%2520TECHNOLOGY%2520COMPANY%2520-%2520CENTRAL%2520POWER%2520CORPORATION%2520(com.cpc.it.thinghiemdien)%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"CENTRAL POWER INFORMATION TECHNOLOGY COMPANY - CENTRAL POWER CORPORATION (com.cpc.it.tracnghiemantoan)",     estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FCENTRAL%2520POWER%2520INFORMATION%2520TECHNOLOGY%2520COMPANY%2520-%2520CENTRAL%2520POWER%2520CORPORATION%2520(com.cpc.it.tracnghiemantoan)%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"PowerChina International Group Limited (iWaMrs)",                                                            estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FPowerChina%2520International%2520Group%2520Limited%2520(iWaMrs)%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"PowerChina International Group Limited (HRU79V)",                                                            estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FPowerChina%2520International%2520Group%2520Limited%2520(HRU79V)%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"Viet Nam Rubber Group Limited",                                                                              estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FViet%2520Nam%2520Rubber%2520Group%2520Limited%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"Aramco Services Company",                                                                                    estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FAramco%2520Services%2520Company%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"Commission on Elections (Complaints Management)",                                                            estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FCommission%2520on%2520Elections%2520(Complaints%2520Management)%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"Commission on Elections (Committee Supervision)",                                                            estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FCommission%2520on%2520Elections%2520(Committee%2520Supervision)%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"Commission on Elections (United politics)",                                                                  estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FCommission%2520on%2520Elections%2520(United%2520politics)%2Fmanifest.plist"},
+        {nombre:"Scarlet",subtitulo:"Beijing Zhizhangyi Inc. (SdpNetworkextension)",                                                             estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fsigner-direct-installs%2Fmain%2Fsigned_apps%2FScarlet%2FBeijing%2520Zhizhangyi%2520Inc.%2520(SdpNetworkextension)%2Fmanifest.plist"},
       ],
     },
 
-    /* ════════════════════════════════════════════════════
-       NEXSTORE — morado
-    ════════════════════════════════════════════════════ */
+    /* ════════════════ NEXSTORE — morado ════════════════ */
     {
-      nombre:      "NexStore",
-      color:       "#a855f7",
-      logoGigante: "",
-      logoApps:    "https://raw.githubusercontent.com/NexSideloading/other-direct-installs/main/icons/NexStore_icon.png",
-      apps: [
-        { nombre:"NexStore", subtitulo:"Aramco Services Company",                                                                                         estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FAramco%2520Services%2520Company%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"BOC International (China) Limited (qi ye weixin app id huiyi kuozhan)",                                           estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FBOC%2520International%2520%2528China%2529%2520Limited%2520%2528qi%2520ye%2520weixin%2520app%2520id%2520huiyi%2520kuozhan%2529%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"BOC International (China) Limited (qi ye weixin app id kuozhan)",                                                 estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FBOC%2520International%2520%2528China%2529%2520Limited%2520%2528qi%2520ye%2520weixin%2520app%2520id%2520kuozhan%2529%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"BOC International (China) Limited (qi ye weixin app id tuisong kuozhan)",                                         estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FBOC%2520International%2520%2528China%2529%2520Limited%2520%2528qi%2520ye%2520weixin%2520app%2520id%2520tuisong%2520kuozhan%2529%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"BOC International (China) Limited (qi ye weixin zhu app id)",                                                     estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FBOC%2520International%2520%2528China%2529%2520Limited%2520%2528qi%2520ye%2520weixin%2520zhu%2520app%2520id%2529%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"Beijing Zhizhangyi Inc. (SdpNetworkextension)",                                                                   estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FBeijing%2520Zhizhangyi%2520Inc.%2520%2528SdpNetworkextension%2529%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"CENTRAL POWER INFORMATION TECHNOLOGY COMPANY - CENTRAL POWER CORPORATION (com.cpc.it.thinghiemdien)",            estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FCENTRAL%2520POWER%2520INFORMATION%2520TECHNOLOGY%2520COMPANY%2520-%2520CENTRAL%2520POWER%2520CORPORATION%2520%2528com.cpc.it.thinghiemdien%2529%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"CENTRAL POWER INFORMATION TECHNOLOGY COMPANY - CENTRAL POWER CORPORATION (com.cpc.it.tracnghiemantoan)",         estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FCENTRAL%2520POWER%2520INFORMATION%2520TECHNOLOGY%2520COMPANY%2520-%2520CENTRAL%2520POWER%2520CORPORATION%2520%2528com.cpc.it.tracnghiemantoan%2529%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"China Academy of Railway Sciences",                                                                               estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FChina%2520Academy%2520of%2520Railway%2520Sciences%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban inde)",                                                   estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FChina%2520Telecom%2520Corporation%2520Limited%2520%2528XC%2520com%2520ctq%2520qmc%2520yiban%2520inde%2529%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban p)",                                                      estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FChina%2520Telecom%2520Corporation%2520Limited%2520%2528XC%2520com%2520ctq%2520qmc%2520yiban%2520p%2529%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban product)",                                                estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FChina%2520Telecom%2520Corporation%2520Limited%2520%2528XC%2520com%2520ctq%2520qmc%2520yiban%2520product%2529%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"Commission on Elections (Committee Supervision)",                                                                  estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FCommission%2520on%2520Elections%2520%2528Committee%2520Supervision%2529%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"Commission on Elections (Complaints Management)",                                                                  estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FCommission%2520on%2520Elections%2520%2528Complaints%2520Management%2529%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"Commission on Elections (United politics)",                                                                        estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FCommission%2520on%2520Elections%2520%2528United%2520politics%2529%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"Forevermark Marketing(Shanghai) Limited",                                                                         estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FForevermark%2520Marketing%2528Shanghai%2520%2529%2520Limited%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"Jiangsu Simcere Pharmaceutical Co.,Ltd (workone)",                                                                estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FJiangsu%2520Simcere%2520Pharmaceutical%2520Co.%252CLtd%2520%2528workone%2529%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"Jiangsu Simcere Pharmaceutical Co.,Ltd (worktwo)",                                                                estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FJiangsu%2520Simcere%2520Pharmaceutical%2520Co.%252CLtd%2520%2528worktwo%2529%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"Moving Increasingly Interconnected Technology Co., Ltd (com.oa11)",                                               estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FMoving%2520Increasingly%2520Interconnected%2520Technology%2520Co.%252C%2520Ltd%2520%2528com.oa11%2529%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"Moving Increasingly Interconnected Technology Co., Ltd (comoaddw)",                                               estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FMoving%2520Increasingly%2520Interconnected%2520Technology%2520Co.%252C%2520Ltd%2520%2528comoaddw%2529%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"National Oilwell Varco, Inc (Carbon LAM)",                                                                        estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FNational%2520Oilwell%2520Varco%252C%2520Inc%2520%2528Carbon%2520LAM%2529%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"National Oilwell Varco, Inc (WB Carbon)",                                                                         estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FNational%2520Oilwell%2520Varco%252C%2520Inc%2520%2528WB%2520Carbon%2529%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"PowerChina International Group Limited (DoaTYw)",                                                                 estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FPowerChina%2520International%2520Group%2520Limited%2520%2528DoaTYw%2529%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"PowerChina International Group Limited (HRU79V)",                                                                 estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FPowerChina%2520International%2520Group%2520Limited%2520%2528HRU79V%2529%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"PowerChina International Group Limited (iWaMrs)",                                                                 estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FPowerChina%2520International%2520Group%2520Limited%2520%2528iWaMrs%2529%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"PowerChina International Group Limited (j3krPY)",                                                                 estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FPowerChina%2520International%2520Group%2520Limited%2520%2528j3krPY%2529%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"PowerChina International Group Limited (nj61nO)",                                                                 estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FPowerChina%2520International%2520Group%2520Limited%2520%2528nj61nO%2529%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"Qingdao Rural Commercial Bank Co., Ltd",                                                                          estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FQingdao%2520Rural%2520Commercial%2520Bank%2520Co.%252C%2520Ltd%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"Viet Nam Rubber Group Limited",                                                                                   estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FViet%2520Nam%2520Rubber%2520Group%2520Limited%2Fmanifest.plist" },
-        { nombre:"NexStore", subtitulo:"XL AXIATA, PT TBK",                                                                                               estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FXL%2520AXIATA%252C%2520PT%2520TBK%2Fmanifest.plist" },
+      nombre:"NexStore", color:"#a855f7", fondoNegro:false,
+      logoApps:"https://raw.githubusercontent.com/NexSideloading/other-direct-installs/main/icons/NexStore_icon.png",
+      apps:[
+        {nombre:"NexStore",subtitulo:"Aramco Services Company",                                                                                    estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FAramco%2520Services%2520Company%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"BOC International (China) Limited (qi ye weixin app id huiyi kuozhan)",                                      estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FBOC%2520International%2520%2528China%2529%2520Limited%2520%2528qi%2520ye%2520weixin%2520app%2520id%2520huiyi%2520kuozhan%2529%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"BOC International (China) Limited (qi ye weixin app id kuozhan)",                                            estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FBOC%2520International%2520%2528China%2529%2520Limited%2520%2528qi%2520ye%2520weixin%2520app%2520id%2520kuozhan%2529%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"BOC International (China) Limited (qi ye weixin app id tuisong kuozhan)",                                    estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FBOC%2520International%2520%2528China%2529%2520Limited%2520%2528qi%2520ye%2520weixin%2520app%2520id%2520tuisong%2520kuozhan%2529%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"BOC International (China) Limited (qi ye weixin zhu app id)",                                               estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FBOC%2520International%2520%2528China%2529%2520Limited%2520%2528qi%2520ye%2520weixin%2520zhu%2520app%2520id%2529%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"Beijing Zhizhangyi Inc. (SdpNetworkextension)",                                                             estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FBeijing%2520Zhizhangyi%2520Inc.%2520%2528SdpNetworkextension%2529%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"CENTRAL POWER INFORMATION TECHNOLOGY COMPANY - CENTRAL POWER CORPORATION (com.cpc.it.thinghiemdien)",       estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FCENTRAL%2520POWER%2520INFORMATION%2520TECHNOLOGY%2520COMPANY%2520-%2520CENTRAL%2520POWER%2520CORPORATION%2520%2528com.cpc.it.thinghiemdien%2529%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"CENTRAL POWER INFORMATION TECHNOLOGY COMPANY - CENTRAL POWER CORPORATION (com.cpc.it.tracnghiemantoan)",    estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FCENTRAL%2520POWER%2520INFORMATION%2520TECHNOLOGY%2520COMPANY%2520-%2520CENTRAL%2520POWER%2520CORPORATION%2520%2528com.cpc.it.tracnghiemantoan%2529%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"China Academy of Railway Sciences",                                                                         estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FChina%2520Academy%2520of%2520Railway%2520Sciences%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban inde)",                                             estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FChina%2520Telecom%2520Corporation%2520Limited%2520%2528XC%2520com%2520ctq%2520qmc%2520yiban%2520inde%2529%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban p)",                                                estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FChina%2520Telecom%2520Corporation%2520Limited%2520%2528XC%2520com%2520ctq%2520qmc%2520yiban%2520p%2529%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban product)",                                          estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FChina%2520Telecom%2520Corporation%2520Limited%2520%2528XC%2520com%2520ctq%2520qmc%2520yiban%2520product%2529%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"Commission on Elections (Committee Supervision)",                                                           estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FCommission%2520on%2520Elections%2520%2528Committee%2520Supervision%2529%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"Commission on Elections (Complaints Management)",                                                           estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FCommission%2520on%2520Elections%2520%2528Complaints%2520Management%2529%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"Commission on Elections (United politics)",                                                                 estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FCommission%2520on%2520Elections%2520%2528United%2520politics%2529%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"Forevermark Marketing(Shanghai) Limited",                                                                   estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FForevermark%2520Marketing%2528Shanghai%2520%2529%2520Limited%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"Jiangsu Simcere Pharmaceutical Co.,Ltd (workone)",                                                         estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FJiangsu%2520Simcere%2520Pharmaceutical%2520Co.%252CLtd%2520%2528workone%2529%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"Jiangsu Simcere Pharmaceutical Co.,Ltd (worktwo)",                                                         estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FJiangsu%2520Simcere%2520Pharmaceutical%2520Co.%252CLtd%2520%2528worktwo%2529%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"Moving Increasingly Interconnected Technology Co., Ltd (com.oa11)",                                        estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FMoving%2520Increasingly%2520Interconnected%2520Technology%2520Co.%252C%2520Ltd%2520%2528com.oa11%2529%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"Moving Increasingly Interconnected Technology Co., Ltd (comoaddw)",                                        estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FMoving%2520Increasingly%2520Interconnected%2520Technology%2520Co.%252C%2520Ltd%2520%2528comoaddw%2529%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"National Oilwell Varco, Inc (Carbon LAM)",                                                                 estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FNational%2520Oilwell%2520Varco%252C%2520Inc%2520%2528Carbon%2520LAM%2529%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"National Oilwell Varco, Inc (WB Carbon)",                                                                  estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FNational%2520Oilwell%2520Varco%252C%2520Inc%2520%2528WB%2520Carbon%2529%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"PowerChina International Group Limited (DoaTYw)",                                                          estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FPowerChina%2520International%2520Group%2520Limited%2520%2528DoaTYw%2529%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"PowerChina International Group Limited (HRU79V)",                                                          estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FPowerChina%2520International%2520Group%2520Limited%2520%2528HRU79V%2529%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"PowerChina International Group Limited (iWaMrs)",                                                          estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FPowerChina%2520International%2520Group%2520Limited%2520%2528iWaMrs%2529%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"PowerChina International Group Limited (j3krPY)",                                                          estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FPowerChina%2520International%2520Group%2520Limited%2520%2528j3krPY%2529%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"PowerChina International Group Limited (nj61nO)",                                                          estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FPowerChina%2520International%2520Group%2520Limited%2520%2528nj61nO%2529%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"Qingdao Rural Commercial Bank Co., Ltd",                                                                   estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FQingdao%2520Rural%2520Commercial%2520Bank%2520Co.%252C%2520Ltd%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"Viet Nam Rubber Group Limited",                                                                            estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FViet%2520Nam%2520Rubber%2520Group%2520Limited%2Fmanifest.plist"},
+        {nombre:"NexStore",subtitulo:"XL AXIATA, PT TBK",                                                                                        estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FNexStore%2FXL%2520AXIATA%252C%2520PT%2520TBK%2Fmanifest.plist"},
       ],
     },
 
-    /* ════════════════════════════════════════════════════
-       SIDEINSTALLER — naranja
-    ════════════════════════════════════════════════════ */
+    /* ════════════════ SIDEINSTALLER — negro ════════════════ */
     {
-      nombre:      "SideInstaller",
-      color:       "#f97316",
-      logoGigante: "",
-      logoApps:    "https://raw.githubusercontent.com/NexSideloading/other-direct-installs/main/icons/SideInstaller_icon.png",
-      apps: [
-        { nombre:"SideInstaller", subtitulo:"Aramco Services Company",                                                                                    estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FAramco%2520Services%2520Company%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"BOC International (China) Limited (qi ye weixin app id huiyi kuozhan)",                                      estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FBOC%2520International%2520%2528China%2529%2520Limited%2520%2528qi%2520ye%2520weixin%2520app%2520id%2520huiyi%2520kuozhan%2529%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"BOC International (China) Limited (qi ye weixin app id kuozhan)",                                            estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FBOC%2520International%2520%2528China%2529%2520Limited%2520%2528qi%2520ye%2520weixin%2520app%2520id%2520kuozhan%2529%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"BOC International (China) Limited (qi ye weixin app id tuisong kuozhan)",                                    estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FBOC%2520International%2520%2528China%2529%2520Limited%2520%2528qi%2520ye%2520weixin%2520app%2520id%2520tuisong%2520kuozhan%2529%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"BOC International (China) Limited (qi ye weixin zhu app id)",                                                estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FBOC%2520International%2520%2528China%2529%2520Limited%2520%2528qi%2520ye%2520weixin%2520zhu%2520app%2520id%2529%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"Beijing Zhizhangyi Inc. (SdpNetworkextension)",                                                              estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FBeijing%2520Zhizhangyi%2520Inc.%2520%2528SdpNetworkextension%2529%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"CENTRAL POWER INFORMATION TECHNOLOGY COMPANY - CENTRAL POWER CORPORATION (com.cpc.it.thinghiemdien)",       estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FCENTRAL%2520POWER%2520INFORMATION%2520TECHNOLOGY%2520COMPANY%2520-%2520CENTRAL%2520POWER%2520CORPORATION%2520%2528com.cpc.it.thinghiemdien%2529%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"CENTRAL POWER INFORMATION TECHNOLOGY COMPANY - CENTRAL POWER CORPORATION (com.cpc.it.tracnghiemantoan)",    estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FCENTRAL%2520POWER%2520INFORMATION%2520TECHNOLOGY%2520COMPANY%2520-%2520CENTRAL%2520POWER%2520CORPORATION%2520%2528com.cpc.it.tracnghiemantoan%2529%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"China Academy of Railway Sciences",                                                                          estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FChina%2520Academy%2520of%2520Railway%2520Sciences%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban inde)",                                              estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FChina%2520Telecom%2520Corporation%2520Limited%2520%2528XC%2520com%2520ctq%2520qmc%2520yiban%2520inde%2529%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban p)",                                                 estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FChina%2520Telecom%2520Corporation%2520Limited%2520%2528XC%2520com%2520ctq%2520qmc%2520yiban%2520p%2529%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban product)",                                           estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FChina%2520Telecom%2520Corporation%2520Limited%2520%2528XC%2520com%2520ctq%2520qmc%2520yiban%2520product%2529%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"Commission on Elections (Committee Supervision)",                                                             estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FCommission%2520on%2520Elections%2520%2528Committee%2520Supervision%2529%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"Commission on Elections (Complaints Management)",                                                             estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FCommission%2520on%2520Elections%2520%2528Complaints%2520Management%2529%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"Commission on Elections (United politics)",                                                                   estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FCommission%2520on%2520Elections%2520%2528United%2520politics%2529%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"Forevermark Marketing(Shanghai) Limited",                                                                    estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FForevermark%2520Marketing%2528Shanghai%2520%2529%2520Limited%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"Jiangsu Simcere Pharmaceutical Co.,Ltd (workone)",                                                           estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FJiangsu%2520Simcere%2520Pharmaceutical%2520Co.%252CLtd%2520%2528workone%2529%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"Jiangsu Simcere Pharmaceutical Co.,Ltd (worktwo)",                                                           estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FJiangsu%2520Simcere%2520Pharmaceutical%2520Co.%252CLtd%2520%2528worktwo%2529%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"Moving Increasingly Interconnected Technology Co., Ltd (com.oa11)",                                          estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FMoving%2520Increasingly%2520Interconnected%2520Technology%2520Co.%252C%2520Ltd%2520%2528com.oa11%2529%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"Moving Increasingly Interconnected Technology Co., Ltd (comoaddw)",                                          estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FMoving%2520Increasingly%2520Interconnected%2520Technology%2520Co.%252C%2520Ltd%2520%2528comoaddw%2529%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"National Oilwell Varco, Inc (Carbon LAM)",                                                                   estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FNational%2520Oilwell%2520Varco%252C%2520Inc%2520%2528Carbon%2520LAM%2529%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"National Oilwell Varco, Inc (WB Carbon)",                                                                    estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FNational%2520Oilwell%2520Varco%252C%2520Inc%2520%2528WB%2520Carbon%2529%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"PowerChina International Group Limited (DoaTYw)",                                                            estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FPowerChina%2520International%2520Group%2520Limited%2520%2528DoaTYw%2529%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"PowerChina International Group Limited (HRU79V)",                                                            estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FPowerChina%2520International%2520Group%2520Limited%2520%2528HRU79V%2529%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"PowerChina International Group Limited (iWaMrs)",                                                            estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FPowerChina%2520International%2520Group%2520Limited%2520%2528iWaMrs%2529%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"PowerChina International Group Limited (j3krPY)",                                                            estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FPowerChina%2520International%2520Group%2520Limited%2520%2528j3krPY%2529%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"PowerChina International Group Limited (nj61nO)",                                                            estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FPowerChina%2520International%2520Group%2520Limited%2520%2528nj61nO%2529%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"Qingdao Rural Commercial Bank Co., Ltd",                                                                     estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FQingdao%2520Rural%2520Commercial%2520Bank%2520Co.%252C%2520Ltd%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"Viet Nam Rubber Group Limited",                                                                              estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FViet%2520Nam%2520Rubber%2520Group%2520Limited%2Fmanifest.plist" },
-        { nombre:"SideInstaller", subtitulo:"XL AXIATA, PT TBK",                                                                                          estado:"activo",  descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FXL%2520AXIATA%252C%2520PT%2520TBK%2Fmanifest.plist" },
+      nombre:"SideInstaller", color:"#f97316", fondoNegro:true,
+      logoApps:"https://raw.githubusercontent.com/NexSideloading/other-direct-installs/main/icons/SideInstaller_icon.png",
+      apps:[
+        {nombre:"SideInstaller",subtitulo:"Aramco Services Company",                                                                              estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FAramco%2520Services%2520Company%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"BOC International (China) Limited (qi ye weixin app id huiyi kuozhan)",                                estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FBOC%2520International%2520%2528China%2529%2520Limited%2520%2528qi%2520ye%2520weixin%2520app%2520id%2520huiyi%2520kuozhan%2529%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"BOC International (China) Limited (qi ye weixin app id kuozhan)",                                      estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FBOC%2520International%2520%2528China%2529%2520Limited%2520%2528qi%2520ye%2520weixin%2520app%2520id%2520kuozhan%2529%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"BOC International (China) Limited (qi ye weixin app id tuisong kuozhan)",                              estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FBOC%2520International%2520%2528China%2529%2520Limited%2520%2528qi%2520ye%2520weixin%2520app%2520id%2520tuisong%2520kuozhan%2529%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"BOC International (China) Limited (qi ye weixin zhu app id)",                                          estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FBOC%2520International%2520%2528China%2529%2520Limited%2520%2528qi%2520ye%2520weixin%2520zhu%2520app%2520id%2529%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"Beijing Zhizhangyi Inc. (SdpNetworkextension)",                                                       estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FBeijing%2520Zhizhangyi%2520Inc.%2520%2528SdpNetworkextension%2529%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"CENTRAL POWER INFORMATION TECHNOLOGY COMPANY - CENTRAL POWER CORPORATION (com.cpc.it.thinghiemdien)",  estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FCENTRAL%2520POWER%2520INFORMATION%2520TECHNOLOGY%2520COMPANY%2520-%2520CENTRAL%2520POWER%2520CORPORATION%2520%2528com.cpc.it.thinghiemdien%2529%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"CENTRAL POWER INFORMATION TECHNOLOGY COMPANY - CENTRAL POWER CORPORATION (com.cpc.it.tracnghiemantoan)",estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FCENTRAL%2520POWER%2520INFORMATION%2520TECHNOLOGY%2520COMPANY%2520-%2520CENTRAL%2520POWER%2520CORPORATION%2520%2528com.cpc.it.tracnghiemantoan%2529%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"China Academy of Railway Sciences",                                                                    estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FChina%2520Academy%2520of%2520Railway%2520Sciences%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban inde)",                                        estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FChina%2520Telecom%2520Corporation%2520Limited%2520%2528XC%2520com%2520ctq%2520qmc%2520yiban%2520inde%2529%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban p)",                                          estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FChina%2520Telecom%2520Corporation%2520Limited%2520%2528XC%2520com%2520ctq%2520qmc%2520yiban%2520p%2529%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"China Telecom Corporation Limited (XC com ctq qmc yiban product)",                                     estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FChina%2520Telecom%2520Corporation%2520Limited%2520%2528XC%2520com%2520ctq%2520qmc%2520yiban%2520product%2529%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"Commission on Elections (Committee Supervision)",                                                      estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FCommission%2520on%2520Elections%2520%2528Committee%2520Supervision%2529%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"Commission on Elections (Complaints Management)",                                                      estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FCommission%2520on%2520Elections%2520%2528Complaints%2520Management%2529%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"Commission on Elections (United politics)",                                                            estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FCommission%2520on%2520Elections%2520%2528United%2520politics%2529%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"Forevermark Marketing(Shanghai) Limited",                                                             estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FForevermark%2520Marketing%2528Shanghai%2520%2529%2520Limited%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"Jiangsu Simcere Pharmaceutical Co.,Ltd (workone)",                                                    estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FJiangsu%2520Simcere%2520Pharmaceutical%2520Co.%252CLtd%2520%2528workone%2529%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"Jiangsu Simcere Pharmaceutical Co.,Ltd (worktwo)",                                                    estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FJiangsu%2520Simcere%2520Pharmaceutical%2520Co.%252CLtd%2520%2528worktwo%2529%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"Moving Increasingly Interconnected Technology Co., Ltd (com.oa11)",                                   estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FMoving%2520Increasingly%2520Interconnected%2520Technology%2520Co.%252C%2520Ltd%2520%2528com.oa11%2529%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"Moving Increasingly Interconnected Technology Co., Ltd (comoaddw)",                                   estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FMoving%2520Increasingly%2520Interconnected%2520Technology%2520Co.%252C%2520Ltd%2520%2528comoaddw%2529%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"National Oilwell Varco, Inc (Carbon LAM)",                                                            estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FNational%2520Oilwell%2520Varco%252C%2520Inc%2520%2528Carbon%2520LAM%2529%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"National Oilwell Varco, Inc (WB Carbon)",                                                             estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FNational%2520Oilwell%2520Varco%252C%2520Inc%2520%2528WB%2520Carbon%2529%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"PowerChina International Group Limited (DoaTYw)",                                                     estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FPowerChina%2520International%2520Group%2520Limited%2520%2528DoaTYw%2529%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"PowerChina International Group Limited (HRU79V)",                                                     estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FPowerChina%2520International%2520Group%2520Limited%2520%2528HRU79V%2529%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"PowerChina International Group Limited (iWaMrs)",                                                     estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FPowerChina%2520International%2520Group%2520Limited%2520%2528iWaMrs%2529%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"PowerChina International Group Limited (j3krPY)",                                                     estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FPowerChina%2520International%2520Group%2520Limited%2520%2528j3krPY%2529%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"PowerChina International Group Limited (nj61nO)",                                                     estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FPowerChina%2520International%2520Group%2520Limited%2520%2528nj61nO%2529%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"Qingdao Rural Commercial Bank Co., Ltd",                                                              estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FQingdao%2520Rural%2520Commercial%2520Bank%2520Co.%252C%2520Ltd%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"Viet Nam Rubber Group Limited",                                                                       estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FViet%2520Nam%2520Rubber%2520Group%2520Limited%2Fmanifest.plist"},
+        {nombre:"SideInstaller",subtitulo:"XL AXIATA, PT TBK",                                                                                   estado:"activo",descarga:"itms-services://?action=download-manifest&url=https%3A%2F%2Fraw.githubusercontent.com%2FNexSideloading%2Fother-direct-installs%2Fmain%2Fsigned_apps%2FSideInstaller%2FXL%2520AXIATA%252C%2520PT%2520TBK%2Fmanifest.plist"},
       ],
     },
 
   ],
 };
 
-/* ═══════════════════════════════════════════════════════
-   MOTOR — NO TOCAR
-═══════════════════════════════════════════════════════ */
-
+/* ═══════════ MOTOR ═══════════ */
 const ESTADOS = {
-  activo:   { texto: "Active",   color: "#22c55e" },
-  revocado: { texto: "Revoked",  color: "#ef4444" },
-  spam:     { texto: "Spam",     color: "#ef4444" },
-  updating: { texto: "Updating", color: "#fbbf24" },
+  activo:   {texto:"Active",   color:"#22c55e"},
+  revocado: {texto:"Revoked",  color:"#ef4444"},
+  spam:     {texto:"Spam",     color:"#ef4444"},
+  updating: {texto:"Updating", color:"#fbbf24"},
+};
+
+const TEXTURAS = {
+  "Ksign":         {char:"K",  size:88},
+  "ESign":         {char:"✒", size:72},
+  "Feather":       {char:"✦", size:72},
+  "Scarlet":       {char:"S",  size:88},
+  "NexStore":      {char:"N",  size:88},
+  "SideInstaller": {char:"⇅", size:72},
 };
 
 let seccionActiva = 0;
 
-function hexARgb(hex) {
-  const h = hex.replace("#", "");
-  return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16)];
+function hexARgb(hex){
+  const h=hex.replace("#","");
+  return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];
+}
+function iniciales(n){ return n.split(" ").map(p=>p[0]).join("").slice(0,2).toUpperCase(); }
+
+function aplicarColor(sec){
+  const [r,g,b]=hexARgb(sec.color||"#3b82f6");
+  const root=document.documentElement.style;
+  root.setProperty("--acento", sec.color||"#3b82f6");
+  root.setProperty("--acento-rgb",`${r}, ${g}, ${b}`);
+  root.setProperty("--fondo", sec.fondoNegro ? "#080808" : `rgb(${Math.round(8+r*.09)},${Math.round(17+g*.09)},${Math.round(32+b*.09)})`);
 }
 
-function iniciales(nombre) {
-  return nombre.split(" ").map(p => p[0]).join("").slice(0, 2).toUpperCase();
+function actualizarTextura(sec){
+  const t=TEXTURAS[sec.nombre]||{char:iniciales(sec.nombre),size:80};
+  const [r,g,b]=hexARgb(sec.color||"#3b82f6");
+  const el=document.getElementById("bg-texture");
+  if(!el)return;
+  el.style.fontSize=t.size+"px";
+  el.style.color=`rgba(${r},${g},${b},0.07)`;
+  const cols=Math.ceil(window.innerWidth/(t.size*1.5))+2;
+  const rows=Math.ceil(window.innerHeight/(t.size*1.5))+4;
+  el.textContent=(t.char+" ").repeat(cols*rows*3);
 }
 
-function aplicarColor(sec) {
-  const [r,g,b] = hexARgb(sec.color || "#3b82f6");
-  const base = [8,17,32];
-  const fondo = base.map((c,i) => Math.round(c + ([r,g,b][i]-c)*0.09));
-  const root = document.documentElement.style;
-  root.setProperty("--acento",     sec.color||"#3b82f6");
-  root.setProperty("--acento-rgb", `${r}, ${g}, ${b}`);
-  root.setProperty("--fondo",      `rgb(${fondo[0]},${fondo[1]},${fondo[2]})`);
-}
-
-function renderHeader() {
-  const h = document.getElementById("barra-superior");
-  h.innerHTML = "";
-  CONFIG.redesSociales.forEach(r => {
-    const a = document.createElement("a");
-    a.className = "red-social";
-    a.href = r.url; a.target = "_blank"; a.title = r.nombre;
-    a.innerHTML = `<img src="${r.icono}" alt="${r.nombre}">`;
+function renderHeader(){
+  const h=document.getElementById("barra-superior");
+  h.innerHTML="";
+  CONFIG.redesSociales.forEach(r=>{
+    const a=document.createElement("a");
+    a.className="red-social"; a.href=r.url; a.target="_blank"; a.title=r.nombre;
+    a.innerHTML=`<img src="${r.icono}" alt="${r.nombre}">`;
     h.appendChild(a);
   });
-  const h1 = document.createElement("h1");
-  h1.textContent = CONFIG.tituloSitio;
+  const h1=document.createElement("h1");
+  h1.textContent=CONFIG.tituloSitio;
   h.appendChild(h1);
-  document.title = CONFIG.tituloSitio;
+  document.title=CONFIG.tituloSitio;
 }
 
-function renderSwitches() {
-  const c = document.getElementById("switches");
-  c.innerHTML = "";
-  CONFIG.secciones.forEach((sec, i) => {
-    const b = document.createElement("button");
-    b.className = "switch-btn" + (i === seccionActiva ? " activo" : "");
-    b.textContent = sec.nombre;
-    b.onclick = () => { seccionActiva = i; renderSeccion(); renderSwitches(); window.scrollTo({top:0,behavior:"smooth"}); };
+function renderSwitches(){
+  const c=document.getElementById("switches");
+  c.innerHTML="";
+  CONFIG.secciones.forEach((sec,i)=>{
+    const b=document.createElement("button");
+    b.className="switch-btn"+(i===seccionActiva?" activo":"");
+    b.textContent=sec.nombre;
+    b.onclick=()=>{seccionActiva=i;renderSeccion();renderSwitches();window.scrollTo({top:0,behavior:"smooth"});};
     c.appendChild(b);
   });
 }
 
-function renderSeccion() {
-  const sec = CONFIG.secciones[seccionActiva];
+function renderSeccion(){
+  const sec=CONFIG.secciones[seccionActiva];
   aplicarColor(sec);
+  actualizarTextura(sec);
+  document.getElementById("titulo-seccion").textContent=sec.nombre;
 
-  document.getElementById("titulo-seccion").textContent = sec.nombre;
+  const logoURL=sec.logoApps||"";
+  const logoDiv=document.getElementById("logo-gigante");
+  logoDiv.innerHTML=logoURL
+    ?`<img src="${logoURL}" alt="logo" onerror="this.parentNode.innerHTML='${iniciales(sec.nombre)}';">`
+    :iniciales(sec.nombre);
 
-  const logoURL = sec.logoGigante || CONFIG.logoGigante || sec.logoApps || "";
-  const logoDiv = document.getElementById("logo-gigante");
-  logoDiv.innerHTML = logoURL ? `<img src="${logoURL}" alt="logo" onerror="this.style.display='none';this.parentNode.innerHTML='${iniciales(sec.nombre)}'">` : iniciales(sec.nombre);
+  const lista=document.getElementById("lista-apps");
+  lista.innerHTML="";
 
-  const lista = document.getElementById("lista-apps");
-  lista.innerHTML = "";
-
-  sec.apps.forEach(app => {
-    const logoApp = app.logo || sec.logoApps || "";
-    const est = ESTADOS[app.estado || "activo"] || ESTADOS.activo;
-
-    const card = document.createElement("div");
-    card.className = "app-card";
-    card.innerHTML = `
+  sec.apps.forEach(app=>{
+    const logoApp=sec.logoApps||"";
+    const est=ESTADOS[app.estado||"activo"]||ESTADOS.activo;
+    const card=document.createElement("div");
+    card.className="app-card";
+    card.innerHTML=`
       <span class="etiqueta-nombre">${app.nombre}</span>
       <div class="app-icono">
-        ${logoApp
-          ? `<img src="${logoApp}" alt="${app.nombre}" onerror="this.style.display='none'">`
-          : iniciales(app.nombre)}
+        ${logoApp?`<img src="${logoApp}" alt="${app.nombre}" onerror="this.parentNode.innerHTML='${iniciales(app.nombre)}'">`:iniciales(app.nombre)}
       </div>
       <div class="app-info">
-        <div class="subtitulo">${app.subtitulo || ""}</div>
+        <div class="subtitulo">${app.subtitulo||""}</div>
         <div class="estado">
-          <span class="orb" style="background:${est.color}; box-shadow:0 0 6px ${est.color};"></span>
+          <span class="orb" style="background:${est.color};box-shadow:0 0 6px ${est.color};"></span>
           ${est.texto}
         </div>
       </div>
-      <a class="btn-instalar" href="${app.descarga}" target="_blank">Install</a>
+      <a class="btn-instalar" href="${app.descarga||"#"}" target="_blank">Install</a>
     `;
     lista.appendChild(card);
   });
+
+  const btnIPA=document.createElement("a");
+  btnIPA.className="btn-ipa-library";
+  btnIPA.href="https://gist.github.com/grave0x/0f5bac981c49f4cf2e4b781164432e6f";
+  btnIPA.target="_blank";
+  btnIPA.innerHTML=`Check the IPA Library <span class="ipa-arrow">→</span>`;
+  lista.appendChild(btnIPA);
 }
 
 renderHeader();
 renderSwitches();
 renderSeccion();
+window.addEventListener("resize",()=>actualizarTextura(CONFIG.secciones[seccionActiva]));
 </script>
+
+<script src="https://gist.github.com/grave0x/0f5bac981c49f4cf2e4b781164432e6f.js"></script>
 </body>
 </html>
